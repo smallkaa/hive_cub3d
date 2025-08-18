@@ -81,6 +81,7 @@ static int read_map(t_map *map, const char *filename, int max_lines, int i)
 t_map	*parsing_args(char *filename)
 {
 	t_map	*map;
+	int		map_start;
 
 	//printf("→ Validating name\n");
 	if (name_validation(filename) < 0)
@@ -108,7 +109,19 @@ t_map	*parsing_args(char *filename)
 		err_msg("read map failed");
 		return (NULL);
 	}
-	//printf("Map parsed successfully\n");
+	map_start = find_map_start(map);
+	if (map_start < 0)
+	{
+		free_map(map);
+		return (err_msg("Error: Map not found"), NULL);
+	}
+	if(symbols_check(map, map_start) < 0)
+	{
+		free_map(map);
+		err_msg("read map failed");
+		return (NULL);
+	}
+	printf("Map parsed successfully\n");
 	return (map);
 }
 
