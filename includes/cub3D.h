@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 13:20:43 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/18 12:28:19 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/18 15:55:03 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB_3D_H
-# define CUD_3D_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
-# include "../MLX42/include/MLX42/MLX42.h"
 # include "libft.h"
 # include <fcntl.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include "../MLX42/include/MLX42/MLX42.h"
 
-# define WALL "./textures/wall5.png"
-# define FLOOR "./textures/back.png"
-# define EXIT "./textures/exit.png"
-# define PLAYER "./textures/bee3.png"
+# define WALL "./textures/1.png"
+# define FLOOR "./textures/2.png"
+# define EXIT "./textures/3.png"
+# define PLAYER "./textures/4.png"
 
 
 typedef struct s_point
@@ -51,5 +52,12 @@ typedef struct s_game
 	mlx_image_t	*img_enemy;
 }				t_game;
 
+//utils
+void	err_msg(char *msg);
+void free_area_partial(char **area, int n);
+void free_map(t_map *map);
+
+//parsing
+t_map	*parsing_args(char *filename);
 
 #endif

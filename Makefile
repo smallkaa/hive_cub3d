@@ -6,12 +6,12 @@
 #    By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/10 14:19:08 by mzhivoto          #+#    #+#              #
-#    Updated: 2025/08/18 12:30:36 by mzhivoto         ###   ########.fr        #
+#    Updated: 2025/08/18 15:21:48 by mzhivoto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Library name
-NAME = cub_3d
+NAME = cub3D
 # Compiler and flags
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I./includes/ -I./MLX42/include -Wunreachable-code -Ofast
@@ -27,6 +27,8 @@ MLX_REPO = https://github.com/codam-coding-college/MLX42.git
 MLXLIB = MLX42/build/libmlx42.a
 LIBFT = $(LIBFT_PATH)/libft.a
 SRC = $(SRCS_PATH)/main.c \
+		$(SRCS_PATH)/utils.c \
+		$(SRCS_PATH)/parsing.c \
 
 
 OBJ := $(patsubst $(SRCS_PATH)/%.c, $(OBJS_PATH)/%.o, $(SRC))
