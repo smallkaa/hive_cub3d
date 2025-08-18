@@ -65,7 +65,7 @@ static int read_map(t_map *map, const char *filename, int max_lines, int i)
 		if (!map->area[i])
 		{
 			close(fd);
-			free_area_partial(map->area, i);
+			free_area(map->area, i);
 			map->area = NULL;
 			return (err_msg("memory error"), -1);
 		}

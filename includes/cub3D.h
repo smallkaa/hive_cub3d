@@ -43,8 +43,8 @@ typedef struct s_game
 
 //utils
 void	err_msg(char *msg);
-void free_area_partial(char **area, int n);
-void free_map(t_map *map);
+void	free_area(char **area, int n);
+void	free_map(t_map *map);
 
 //parsing
 t_map	*parsing_args(char *filename);
