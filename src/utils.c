@@ -18,6 +18,21 @@ void	err_msg(char *msg)
 // 	ft_putendl_fd(msg, 2);
 // }
 
+void free_area(char **area, int n)
+{
+	int i;
+
+	if (!area)
+		return;
+	i = 0;
+	while (i < n)
+	{
+		free(area[i]);
+		i++;
+	}
+	free(area);
+}
+
 void free_map(t_map *map)
 {
 	int i;
