@@ -1,6 +1,11 @@
 #include "cub3D.h"
 
-// strncmp with CO NO ......
+static int	skip_spaces(const char *str, int i)
+{
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	return (i);
+}
 
 static char	*dup_trim_path(const char *line)
 {
@@ -23,6 +28,41 @@ static char	*dup_trim_path(const char *line)
 	return (new_line);
 }
 
+static int	parse_number(const char *str, int *i)
+{
+	int	num = 0;
+
+	*i = skip_spaces(str, *i);
+	if (str[*i] < '0' || str[*i] > '9')
+		return (-1);
+	while (str[*i] >= '0' && str[*i] <= '9')
+	{
+		num = num * 10 + (str[*i] - '0');
+		(*i)++;
+	}
+	return (num);
+}
+
+uint32_t	parse_color(const char *str)
+{
+	int		r, g, b;
+	int		i;
+
+	i = 0;
+	r = parse_number(str, &i);
+	if (r < 0 || r > 255 || str[i++] != ',')
+		return (0xFFFFFFFF);
+	g = parse_number(str, &i);
+	if (g < 0 || g > 255 || str[i++] != ',')
+		return (0xFFFFFFFF);
+	b = parse_number(str, &i);
+	if (b < 0 || b > 255)
+		return (0xFFFFFFFF);
+	i = skip_spaces(str, i);
+	if (str[i] != '\0' && str[i] != '\n') // nothing extra allowed
+		return (0xFFFFFFFF);
+	return ((255 << 24) | (r << 16) | (g << 8) | b);
+}
 static int	set_path(char **dst, const char *rhs)
 {
 	if (*dst)
@@ -45,6 +85,20 @@ int	parse_identifier_line(t_map *map, const char *line)
 		return (set_path(&map->we, line + 2));
 	if (!ft_strncmp(line, "EA", 2) && ft_isspace((unsigned char)line[2]))
 		return (set_path(&map->ea, line + 2));
+	if (line[0] == 'F' && ft_isspace((unsigned char)line[1]))
+	{
+		if (map->floor_c != 0xFFFFFFFF)
+			return (err_msg("Error: duplicate floor color"), 0);
+		map->floor_c = parse_color(line + 1);
+		return (map->floor_c != 0xFFFFFFFF);
+	}
+	if (line[0] == 'C' && ft_isspace((unsigned char)line[1]))
+	{
+		if (map->ceil_c != 0xFFFFFFFF)
+			return (err_msg("Error: duplicate ceiling color"), 0);
+		map->ceil_c = parse_color(line + 1);
+		return (map->ceil_c != 0xFFFFFFFF);
+	}
 	return (0);
 }
 

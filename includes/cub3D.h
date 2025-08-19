@@ -20,11 +20,11 @@ typedef struct s_point
 	int			y;
 }				t_point;
 
-typedef struct s_rgb
-{
-	int r, g, b;
-	int set; // 0/1
-}				t_rgb;
+// typedef struct s_rgb
+// {
+// 	int r, g, b;
+// 	int set; // 0/1
+// }				t_rgb;
 
 typedef struct s_map
 {
@@ -32,8 +32,8 @@ typedef struct s_map
 	char		*so;
 	char		*we;
 	char		*ea;
-	t_rgb		floor_c;
-	t_rgb		ceil_c;
+	uint32_t	floor_c;
+	uint32_t	ceil_c;
 	char		**area;
 	int			size_x;
 	int			size_y;
@@ -59,8 +59,15 @@ void			free_area(char **area, int n);
 void			free_map(t_map *map);
 
 // parsing
+
+int				read_map(t_map *map, const char *filename, int max_lines,
+					int i);
+int				count_lines(char *filename);
 t_map			*parsing_args(char *filename);
 int				symbols_check(t_map *map, int map_start);
 int				find_map_start(t_map *map);
+int				parse_identifier_line(t_map *map, const char *line);
+bool			is_map_line(const char *line);
+int				player_check(t_map *map, int map_start);
 
 #endif
