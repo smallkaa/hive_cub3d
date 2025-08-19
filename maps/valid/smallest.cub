@@ -1,0 +1,11 @@
+NO ./assets/wood_e.xpm
+       SO ./assets/wood_n.xpm
+WE ./assets/wood_w.xpm
+EA ./assets/wood_s.xpm
+
+F 184,113,39
+C 51,198,227
+
+  1
+ 1N1
+  1
