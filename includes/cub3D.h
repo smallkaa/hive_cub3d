@@ -1,4 +1,3 @@
-
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -39,10 +38,8 @@ typedef struct s_hero
 typedef struct s_game
 {
 	mlx_t		*mlx;
+	mlx_image_t	*img;
 	t_map		*map;
-	mlx_image_t	*img_wall;
-	mlx_image_t	*img_floor;
-	//mlx_image_t	*img_player;
 
 }				t_game;
 
