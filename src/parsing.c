@@ -14,9 +14,6 @@ int	name_validation(char *filename)
 	return (1);
 }
 
-
-
-
 t_map	*parsing_args(char *filename)
 {
 	t_map	*map;

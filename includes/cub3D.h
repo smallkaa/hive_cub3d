@@ -14,19 +14,14 @@
 # define EXIT "./textures/3.png"
 # define PLAYER "./textures/4.png"
 
-typedef struct s_point
+typedef struct s_hero
 {
-	int			x;
-	int			y;
-}				t_point;
+	double		x;
+	double		y;
+	double		angle;
+} t_hero;
 
-// typedef struct s_rgb
-// {
-// 	int r, g, b;
-// 	int set; // 0/1
-// }				t_rgb;
-
-typedef struct s_map
+	typedef struct s_map
 {
 	char		*no;
 	char		*so;
@@ -37,7 +32,7 @@ typedef struct s_map
 	char		**area;
 	int			size_x;
 	int			size_y;
-	t_point		player_pos;
+	t_hero		hero;
 	// t_point		exit_pos;
 }				t_map;
 
@@ -47,10 +42,8 @@ typedef struct s_game
 	t_map		*map;
 	mlx_image_t	*img_wall;
 	mlx_image_t	*img_floor;
-	mlx_image_t	*img_coll;
-	mlx_image_t	*img_exit;
-	mlx_image_t	*img_player;
-	mlx_image_t	*img_enemy;
+	//mlx_image_t	*img_player;
+
 }				t_game;
 
 // utils
