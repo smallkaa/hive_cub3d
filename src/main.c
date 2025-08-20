@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	printf("Floor color: %u\n", map->floor_c);
 	printf("Ceil color: %u\n", map->ceil_c);
 	printf("map size %d\n", map->size_y);
-	printf("Player position x- %f y - %f\n", map->hero.x, map->hero.y);
+	printf("Player position x- %f y - %f\n, angle - %f\n", map->hero.x, map->hero.y, map->hero.angle);
 	for(int i = 0; map->area[i]; i++)
 		printf("%s\n", map->area[i]);
 	return (0);
