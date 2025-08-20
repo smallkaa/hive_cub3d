@@ -14,73 +14,14 @@ int	name_validation(char *filename)
 	return (1);
 }
 
-int	count_lines(char *filename)
-{
-	int		fd;
-	int		count;
-	char	*line;
 
-	count = 0;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (err_msg("file openning error 1"), -1);
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		count++;
-		free(line);
-	}
-	close(fd);
-	return (count);
-}
-
-static int read_map(t_map *map, const char *filename, int max_lines, int i)
-{
-	int   fd;
-	char *line;
-	char *nl;
-
-	fd = open(filename, O_RDONLY);
-	if (fd <= 0)
-		return (err_msg("file opening error 2"), -1);
-
-	while (i < max_lines)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break;
-
-		nl = ft_strchr(line, '\n');
-		if (nl)
-			*nl = '\0';
-		if (i >= max_lines) 
-		{
-   			close(fd);
-			return (err_msg("too many lines"), -1);
-		}
-		map->area[i] = ft_strdup(line);
-		free(line);
-		if (!map->area[i])
-		{
-			close(fd);
-			free_area(map->area, i);
-			map->area = NULL;
-			return (err_msg("memory error"), -1);
-		}
-		i++;
-	}
-	close(fd);
-	map->area[i] = NULL;
- 
-	return (1);
-}
 
 
 t_map	*parsing_args(char *filename)
 {
 	t_map	*map;
+	int		map_start;
+	int i = 0;
 
 	//printf("→ Validating name\n");
 	if (name_validation(filename) < 0)
@@ -94,12 +35,22 @@ t_map	*parsing_args(char *filename)
 	//printf("→ Counting lines\n");
 	map->size_y = count_lines(filename);
 	if (map->size_y < 1)
-		return (free(map), err_msg("error file reading"), NULL);
+	{
+		free(map);
+		err_msg("error file reading");
+		return (NULL);
+	}
+		
 
 	//printf("→ Allocating map->area (%d lines)\n", map->size_y);
 	map->area = ft_calloc(map->size_y + 1, sizeof(char *));
 	if (!map->area)
-		return (free_map(map), err_msg("memory error"), NULL);
+	{
+		free_map(map);
+		err_msg("memory error");
+		return (NULL);
+	}
+		
 	if (read_map(map, filename, map->size_y + 1, 0) < 0)
 	{
 		if (map->area)
@@ -108,7 +59,43 @@ t_map	*parsing_args(char *filename)
 		err_msg("read map failed");
 		return (NULL);
 	}
-	//printf("Map parsed successfully\n");
+	// ✅ Init color sentinels
+	map->floor_c = 0xFFFFFFFF;
+	map->ceil_c = 0xFFFFFFFF;
+
+	// ✅ Parse config identifiers before the map starts
+	while (map->area[i])
+	{
+		if (is_map_line(map->area[i]))
+			break;
+		else if (map->area[i][0] != '\0' && map->area[i][0] != '\n')
+		{
+			if (!parse_identifier_line(map, map->area[i]))
+			{
+				free_map(map);
+				return (err_msg("Error: invalid identifier line"), NULL);
+			}
+		}
+		i++;
+	}
+
+	// ✅ Check all required textures and colors are present
+	if (!map->no || !map->so || !map->we || !map->ea ||
+		map->floor_c == 0xFFFFFFFF || map->ceil_c == 0xFFFFFFFF)
+	{
+		free_map(map);
+		return (err_msg("Error: missing texture or color"), NULL);
+	}
+
+	// ✅ Start map parsing from detected index
+	map_start = i;
+	if (symbols_check(map, map_start) < 0 || player_check(map, map_start) < 0 )
+	{
+		free_map(map);
+		return (NULL);
+	}
+	printf("LINE[%d]: %s\n", i, map->area[i]);
+	printf("Map parsed successfully\n");
 	return (map);
 }
 

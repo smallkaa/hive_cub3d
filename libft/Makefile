@@ -6,7 +6,7 @@
 #    By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/10 14:19:08 by mzhivoto          #+#    #+#              #
-#    Updated: 2025/03/03 12:41:21 by mzhivoto         ###   ########.fr        #
+#    Updated: 2025/08/18 20:24:15 by mzhivoto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC = ft_bzero.c\
 	ft_isascii.c\
 	ft_isdigit.c\
 	ft_isprint.c\
+	ft_isspace.c\
 	ft_memchr.c\
 	ft_memcmp.c\
 	ft_memcpy.c\

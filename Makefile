@@ -18,6 +18,9 @@ LIBFT = $(LIBFT_PATH)/libft.a
 SRC = $(SRCS_PATH)/main.c \
 		$(SRCS_PATH)/utils.c \
 		$(SRCS_PATH)/parsing.c \
+		$(SRCS_PATH)/map_check.c \
+		$(SRCS_PATH)/config.c \
+		$(SRCS_PATH)/read.c \
 
 
 OBJ := $(patsubst $(SRCS_PATH)/%.c, $(OBJS_PATH)/%.o, $(SRC))
