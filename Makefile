@@ -4,7 +4,26 @@ NAME = cub3D
 # Compiler and flags
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I./includes/ -I./MLX42/include -Wunreachable-code -Ofast
-LDFLAGS = -ldl -lglfw -lm
+
+# --- OS Specific Configuration ---
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	# Flags for Linux
+	LDFLAGS = -ldl -lglfw -lm
+else ifeq ($(UNAME_S),Darwin)
+	# Flags for macOS
+	# Check for Homebrew and GLFW dependency
+	BREW_PATH := $(shell which brew)
+	ifeq ($(BREW_PATH),)
+		$(error "Homebrew not found. Please install it from https://brew.sh/")
+	endif
+	GLFW_PREFIX := $(shell brew --prefix glfw 2>/dev/null)
+	ifeq ($(GLFW_PREFIX),)
+		$(error "GLFW library not found. Please install it by running: brew install glfw")
+	endif
+	LDFLAGS = -L$(GLFW_PREFIX)/lib -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+endif
+# --- End of OS Specific Configuration ---
 
 SRCS_PATH = ./src
 OBJS_PATH = ./obj
