@@ -3,9 +3,6 @@
 #include "../MLX42/include/MLX42/MLX42.h"
 #include <stdlib.h> // For exit()
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
-
 // Forward declaration
 void	cleanup_and_exit(void *param);
 
@@ -103,6 +100,7 @@ int	main(int ac, char **av)
 		free_map(map);
 		return (1);
 	}
+	setup_input(&game);
 
 	// Create a new image to draw on
 	game.img = mlx_new_image(game.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -118,12 +116,12 @@ int	main(int ac, char **av)
 	
 	// Draw the background colors to the image
 	draw_background(&game);
-	
+	render_view(&game);
 	// Place the image onto the window
 	mlx_image_to_window(game.mlx, game.img, 0, 0);
 
 	// Register a hook for any key press
-	mlx_key_hook(game.mlx, &key_press, &game);
+	//mlx_key_hook(game.mlx, &key_press, &game);
 	
 	// Register a hook for when the user clicks the close button on the window
 	mlx_close_hook(game.mlx, &cleanup_and_exit, &game);
