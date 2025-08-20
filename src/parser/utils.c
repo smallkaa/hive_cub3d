@@ -17,6 +17,17 @@ void	err_msg(char *msg)
 // {
 // 	ft_putendl_fd(msg, 2);
 // }
+bool is_valid_symbol(char c)
+{
+	return (c == '0' || c == '1' || c == ' ' || c == 'N' || c == 'S' || c == 'W' || c == 'E');
+}
+
+int	skip_spaces(const char *str, int i)
+{
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	return (i);
+}
 
 void free_area(char **area, int n)
 {

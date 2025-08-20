@@ -1,12 +1,5 @@
 #include "cub3D.h"
 
-static int	skip_spaces(const char *str, int i)
-{
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	return (i);
-}
-
 static char	*dup_trim_path(const char *line)
 {
 	size_t	n;
@@ -63,6 +56,7 @@ uint32_t	parse_color(const char *str)
 		return (0xFFFFFFFF);
 	return ((255 << 24) | (r << 16) | (g << 8) | b);
 }
+
 static int	set_path(char **dst, const char *rhs)
 {
 	if (*dst)
