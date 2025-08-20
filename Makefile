@@ -16,11 +16,11 @@ MLX_REPO = https://github.com/codam-coding-college/MLX42.git
 MLXLIB = MLX42/build/libmlx42.a
 LIBFT = $(LIBFT_PATH)/libft.a
 SRC = $(SRCS_PATH)/main.c \
-		$(SRCS_PATH)/utils.c \
-		$(SRCS_PATH)/parsing.c \
-		$(SRCS_PATH)/map_check.c \
-		$(SRCS_PATH)/config.c \
-		$(SRCS_PATH)/read.c \
+		$(SRCS_PATH)/parser/utils.c \
+		$(SRCS_PATH)/parser/parsing.c \
+		$(SRCS_PATH)/parser/map_check.c \
+		$(SRCS_PATH)/parser/config.c \
+		$(SRCS_PATH)/parser/read.c \
 
 
 OBJ := $(patsubst $(SRCS_PATH)/%.c, $(OBJS_PATH)/%.o, $(SRC))
@@ -32,11 +32,9 @@ all: $(MLX_PATH) $(NAME)
 $(NAME): $(OBJ) $(LIBFT) $(MLX_PATH)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLXLIB) $(LDFLAGS) -o $(NAME)
 
-$(OBJS_PATH):
-	mkdir -p $(OBJS_PATH)
-
 # Compile each .c file into a .o file
-$(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c | $(OBJS_PATH)
+$(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #Clone and build MLX42

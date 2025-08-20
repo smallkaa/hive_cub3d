@@ -85,8 +85,8 @@ int player_check(t_map *map, int map_start)
 				|| map->area[y][x] == 'E' || map->area[y][x] =='W')
 			{
 				player_count++;
-				map->player_pos.x = x;
-				map->player_pos.y = y;
+				map->hero.x = x;
+				map->hero.y = y;
 			}
 			x++; // increment column
 		}
