@@ -35,6 +35,7 @@ MLX_REPO = https://github.com/codam-coding-college/MLX42.git
 MLXLIB = MLX42/build/libmlx42.a
 LIBFT = $(LIBFT_PATH)/libft.a
 SRC = $(SRCS_PATH)/main.c \
+		$(SRCS_PATH)/raycast.c \
 		$(SRCS_PATH)/parser/utils.c \
 		$(SRCS_PATH)/parser/parsing.c \
 		$(SRCS_PATH)/parser/map_check.c \

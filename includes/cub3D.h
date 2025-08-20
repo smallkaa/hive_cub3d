@@ -7,11 +7,10 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <math.h>
 
-# define WALL "./textures/1.png"
-# define FLOOR "./textures/2.png"
-# define EXIT "./textures/3.png"
-# define PLAYER "./textures/4.png"
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 600
 
 typedef struct s_hero
 {
@@ -43,6 +42,28 @@ typedef struct s_game
 
 }				t_game;
 
+typedef struct s_ray
+{
+	double	posx;
+	double	posy;
+	double	dirx;
+	double	diry;
+	double	plx;
+	double	ply;
+	double	rx;
+	double	ry;
+	int		mapx;
+	int		mapy;
+	double	dx;
+	double	dy;
+	double	sx;
+	double	sy;
+	int		stepx;
+	int		stepy;
+	int		side;
+	double	perp;
+}	t_ray;
+
 // utils
 void			err_msg(char *msg);
 void			free_area(char **area, int n);
@@ -59,5 +80,6 @@ int				find_map_start(t_map *map);
 int				parse_identifier_line(t_map *map, const char *line);
 bool			is_map_line(const char *line);
 int				player_check(t_map *map, int map_start);
+void			render_view(t_game *game);
 
 #endif

@@ -3,9 +3,6 @@
 #include "../MLX42/include/MLX42/MLX42.h"
 #include <stdlib.h> // For exit()
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
-
 // Forward declaration
 void	cleanup_and_exit(void *param);
 
@@ -118,7 +115,7 @@ int	main(int ac, char **av)
 	
 	// Draw the background colors to the image
 	draw_background(&game);
-	
+	render_view(&game);
 	// Place the image onto the window
 	mlx_image_to_window(game.mlx, game.img, 0, 0);
 
