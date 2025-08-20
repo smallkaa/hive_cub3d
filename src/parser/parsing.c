@@ -50,8 +50,6 @@ t_map	*parsing_args(char *filename)
 		
 	if (read_map(map, filename, map->size_y + 1, 0) < 0)
 	{
-		if (map->area)
-			free(map);
 		free(map);
 		err_msg("read map failed");
 		return (NULL);

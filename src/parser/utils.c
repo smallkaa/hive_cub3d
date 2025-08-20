@@ -37,15 +37,25 @@ void free_map(t_map *map)
 {
 	int i;
 
-	if (!map || !map->area)
+	if (!map)
 		return;
-	i = 0;
-	while (map->area[i])
+	if (map->area)
 	{
-		free(map->area[i]);
-		i++;
+		i = 0;
+		while (map->area[i])
+		{
+			free(map->area[i]);
+			i++;
+		}
+		free(map->area);
 	}
-	free(map->area);
-	map->area = NULL;
-	map->size_y = 0;
+	if (map->no)
+		free(map->no);
+	if (map->so)
+		free(map->so);
+	if (map->we)
+		free(map->we);
+	if (map->ea)
+		free(map->ea);
+	free(map);
 }
