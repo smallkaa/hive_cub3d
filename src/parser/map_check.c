@@ -88,6 +88,14 @@ int player_check(t_map *map, int map_start)
 				map->hero.x = x;
 				map->hero.y = y;
 			}
+			if(map->area[y][x] == 'N')
+				map->hero.angle = 0;
+			else if (map->area[y][x] == 'S')
+				map->hero.angle = 180;
+			else if (map->area[y][x] == 'E')
+				map->hero.angle = 90;
+			else if (map->area[y][x] == 'W')
+				map->hero.angle = 270;
 			x++; // increment column
 		}
 		y++; // increment row
