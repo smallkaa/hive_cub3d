@@ -134,6 +134,7 @@ void	render_view(t_game *g)
 	int		x;
 	t_ray	r;
 
+	ft_memset(&r, 0, sizeof(t_ray));
 	r.posx = g->map->hero.x + 0.5;
 	r.posy = g->map->hero.y + 0.5;
 	init_camera(g, &r);

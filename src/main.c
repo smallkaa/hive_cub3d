@@ -1,9 +1,4 @@
 #include "cub3D.h"
-//#include "MLX42/MLX42.h" // Make sure this is the correct path
-#include "../MLX42/include/MLX42/MLX42.h"
-#include <stdlib.h> // For exit()
-
-
 
 int	main(int ac, char **av)
 {
