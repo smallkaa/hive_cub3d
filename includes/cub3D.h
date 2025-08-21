@@ -89,6 +89,8 @@ int				symbols_check(t_map *map, int map_start);
 int				find_map_start(t_map *map);
 int				parse_identifier_line(t_map *map, const char *line);
 bool			is_map_line(const char *line);
+bool			is_valid_symbol(char c);
+int				skip_spaces(const char *str, int i);
 int				player_check(t_map *map, int map_start);
 void			render_view(t_game *game);
 void			setup_input(t_game *game);

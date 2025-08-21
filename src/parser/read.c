@@ -22,44 +22,31 @@ int	count_lines(char *filename)
 	return (count);
 }
 
-
 int read_map(t_map *map, const char *filename, int max_lines, int i)
 {
-	int   fd;
-	char *line;
-	char *nl;
+	int		fd;
+	char	*line;
+	char	*nl;
 
 	fd = open(filename, O_RDONLY);
-	if (fd <= 0)
-		return (err_msg("file opening error 2"), -1);
-
+	if (fd < 0)
+		return (err_msg("file openning error 2"), -1);
 	while (i < max_lines)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break;
-
 		nl = ft_strchr(line, '\n');
 		if (nl)
 			*nl = '\0';
-		if (i >= max_lines) 
-		{
-			close(fd);
-			return (err_msg("too many lines"), -1);
-		}
 		map->area[i] = ft_strdup(line);
 		free(line);
 		if (!map->area[i])
-		{
-			close(fd);
-			free_area(map->area, i);
-			map->area = NULL;
-			return (err_msg("memory error"), -1);
-		}
+			return (close(fd), err_msg("memory error"), -1);
 		i++;
 	}
 	close(fd);
-	map->area[i] = NULL;
- 
-	return (1);
+	if (i < max_lines)
+		map->area[i] = NULL;
+	return (i);
 }
