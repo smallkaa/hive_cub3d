@@ -47,16 +47,6 @@ typedef struct s_textures
 	mlx_texture_t *tex[4];   // NO, SO, WE, EA (raw PNGs)
 } t_textures;
 
-typedef struct s_game
-{
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_map		*map;
-	t_textures	tx;
-}				t_game;
-
-
-
 typedef struct s_ray
 {
 	double	posx;
@@ -78,6 +68,18 @@ typedef struct s_ray
 	int		side;
 	double	perp;
 }	t_ray;
+
+typedef struct s_game
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_map		*map;
+	t_textures	tx;
+	 t_ray		ray;
+}				t_game;
+
+
+
 
 typedef struct s_pixel_data
 {
