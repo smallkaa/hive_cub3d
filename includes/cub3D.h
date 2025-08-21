@@ -67,10 +67,10 @@ typedef struct s_ray
 
 
 // Прототипы
-// void init_map(t_map *map);
-// void print_map(t_map *map, int player_x, int player_y);
-// void print_map_with_leak(t_map *map, int px, int py, int lx, int ly);
-// void print_map_with_islands(t_map *original_map, t_map *flooded_map, int px, int py);
+void init_map(t_map *map);
+void print_map(t_map *map, int player_x, int player_y);
+//void print_map_with_leak(t_map *map, int px, int py, int lx, int ly);
+//void print_map_with_islands(t_map *original_map, t_map *flooded_map, int px, int py);
 // bool is_map_closed(t_map *map, int start_x, int start_y, int *exit_x, int *exit_y);
 // bool is_map_fully_accessible(t_map *map, t_map *map_copy, int start_x, int start_y);
 
