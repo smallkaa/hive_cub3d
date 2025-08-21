@@ -64,6 +64,16 @@ typedef struct s_ray
 	double	perp;
 }	t_ray;
 
+
+
+// Прототипы
+void init_map(t_map *map);
+void print_map(t_map *map, int player_x, int player_y);
+void print_map_with_leak(t_map *map, int px, int py, int lx, int ly);
+void print_map_with_islands(t_map *original_map, t_map *flooded_map, int px, int py);
+bool is_map_closed(t_map *map, int start_x, int start_y, int *exit_x, int *exit_y);
+bool is_map_fully_accessible(t_map *map, t_map *map_copy, int start_x, int start_y);
+
 // utils
 void			err_msg(char *msg);
 void			free_area(char **area, int n);
@@ -84,5 +94,7 @@ int				skip_spaces(const char *str, int i);
 int				player_check(t_map *map, int map_start);
 void			render_view(t_game *game);
 void			setup_input(t_game *game);
+void	draw_background(t_game *game);
+
 
 #endif
