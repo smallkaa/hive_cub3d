@@ -3,6 +3,16 @@
 // This function will be called to free memory and exit the game
 void	close_game(t_game *game)
 {
+	int i = 0;
+
+	while (i < 4)
+	{
+		if (game->tx.tex[i])
+		{
+			mlx_delete_texture(game->tx.tex[i]);
+		}
+		i++;
+	}
 // Terminate MLX and exit
 	mlx_terminate(game->mlx);
 }
@@ -16,16 +26,23 @@ void key_press(mlx_key_data_t keydata, void* param)
 	close_game(game);
 }
 
-
-
-
 // This is for the window's close button
 void	cleanup_and_exit(void *param)
 {
 	t_game *game = (t_game *)param;
 	close_game(game);
 }
-
+void game_update(void *param)
+{
+    t_game *game = (t_game *)param;
+    
+    // Clear the image
+    ft_memset(game->img->pixels, 0, game->img->width * game->img->height * sizeof(uint32_t));
+    
+    // Redraw everything
+    draw_background(game);
+    render_view(game);
+}
 void game_loop(t_game *game)
 {
     // Initialize MLX42 and create a window
@@ -37,6 +54,11 @@ void game_loop(t_game *game)
 	}
 	setup_input(game);
 
+	if (load_all_textures(game) < 0)
+	{
+		mlx_terminate(game->mlx);
+		return;
+	}
 	// Create a new image to draw on
 	game->img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!game->img)
@@ -57,7 +79,8 @@ void game_loop(t_game *game)
 	//mlx_key_hook(game.mlx, &key_press, &game);
 	
 	// Register a hook for when the user clicks the close button on the window
-	mlx_close_hook(game->mlx, &cleanup_and_exit, &game);
+	mlx_loop_hook(game->mlx, &game_update, game);
+	mlx_close_hook(game->mlx, &cleanup_and_exit, game);
 
 	// Start the MLX event loop
 	mlx_loop(game->mlx);

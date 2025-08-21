@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:59:30 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/03/26 14:53:47 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/21 14:56:30 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ char	*get_next_line(int fd)
 		free(buffer);
 		buffer = NULL;
 		return (NULL);
+	}
+	if (!line && buffer)
+	{
+		free(buffer);
+		buffer = NULL;
 	}
 	return (line);
 }
