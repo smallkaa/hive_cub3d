@@ -92,5 +92,7 @@ bool			is_map_line(const char *line);
 int				player_check(t_map *map, int map_start);
 void			render_view(t_game *game);
 void			setup_input(t_game *game);
+void	draw_background(t_game *game);
+
 
 #endif

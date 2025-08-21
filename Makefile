@@ -35,7 +35,8 @@ MLX_REPO = https://github.com/codam-coding-college/MLX42.git
 MLXLIB = MLX42/build/libmlx42.a
 LIBFT = $(LIBFT_PATH)/libft.a
 SRC = $(SRCS_PATH)/main.c \
-		$(SRCS_PATH)/raycast.c \
+		$(SRCS_PATH)/raycast/raycast.c \
+		$(SRCS_PATH)/raycast/drawback.c \
 		$(SRCS_PATH)/input.c \
 		$(SRCS_PATH)/parser/utils.c \
 		$(SRCS_PATH)/parser/parsing.c \
@@ -76,7 +77,7 @@ clean:
 	@rm -rf $(OBJS_PATH)
 	@$(MAKE) -C $(LIBFT_PATH) clean
 	@rm -rf $(MLX_PATH)/build
-	@rm sources_dump.txt
+	@rm -f sources_dump.txt
 
 fclean: clean
 	/bin/rm -f $(NAME)
