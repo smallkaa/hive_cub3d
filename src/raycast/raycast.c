@@ -101,29 +101,84 @@ static void	perform_dda(t_game *g, t_ray *r)
 		r->perp = 1e-6;
 }
 
+static void	draw_wall_pixel(t_game *g, t_pixel_data *pixel, t_ray *r)
+{
+	t_face			face;
+	mlx_texture_t	*texture;
+	int				tex_x;
+	int				tex_y;
+	uint32_t		color;
+
+	face = pick_face(r);
+	texture = g->tx.tex[face];
+	if (!texture)
+	{
+		color = 0xFF9E9E9E;
+		if (r->side == 1)
+			color = 0xFF6E6E6E;
+	}
+	else
+	{
+		tex_x = (pixel->x * texture->width) / WINDOW_WIDTH;
+		tex_y = ((pixel->y - pixel->y0) * texture->height) / (pixel->y1 - pixel->y0 + 1);
+		if (tex_x >= (int)texture->width)
+			tex_x = texture->width - 1;
+		if (tex_y >= (int)texture->height)
+			tex_y = texture->height - 1;
+		color = get_texture_pixel(texture, tex_x, tex_y);
+	}
+	mlx_put_pixel(g->img, pixel->x, pixel->y, color);
+}
 /* Draw one vertical stripe for the hit. */
+// static void	draw_stripe(t_game *g, int x, t_ray *r)
+// {
+// 	int			line_h;
+// 	int			y0;
+// 	int			y1;
+// 	uint32_t	col;
+// 	int			y;
+
+// 	line_h = (int)((double)WINDOW_HEIGHT / r->perp);
+// 	y0 = -line_h / 2 + WINDOW_HEIGHT / 2;
+// 	if (y0 < 0)
+// 		y0 = 0;
+// 	y1 = line_h / 2 + WINDOW_HEIGHT / 2;
+// 	if (y1 >= WINDOW_HEIGHT)
+// 		y1 = WINDOW_HEIGHT - 1;
+// 	col = 0xFF9E9E9E;
+// 	if (r->side == 1)
+// 		col = 0xFF6E6E6E;
+// 	y = y0;
+// 	while (y <= y1)
+// 	{
+// 		mlx_put_pixel(g->img, x, y, col);
+// 		y++;
+// 	}
+// }
+
 static void	draw_stripe(t_game *g, int x, t_ray *r)
 {
 	int			line_h;
 	int			y0;
 	int			y1;
-	uint32_t	col;
 	int			y;
+	t_pixel_data pixel;
 
 	line_h = (int)((double)WINDOW_HEIGHT / r->perp);
 	y0 = -line_h / 2 + WINDOW_HEIGHT / 2;
 	if (y0 < 0)
 		y0 = 0;
 	y1 = line_h / 2 + WINDOW_HEIGHT / 2;
-	if (y1 >= WINDOW_HEIGHT)
+	if (y1 >= WINDOW_HEIGHT) 
 		y1 = WINDOW_HEIGHT - 1;
-	col = 0xFF9E9E9E;
-	if (r->side == 1)
-		col = 0xFF6E6E6E;
+	pixel.x = x;
+	pixel.y0 = y0;
+	pixel.y1 = y1;
 	y = y0;
 	while (y <= y1)
 	{
-		mlx_put_pixel(g->img, x, y, col);
+		pixel.y = y;
+		draw_wall_pixel(g, &pixel, r);  // 4 args exactly
 		y++;
 	}
 }
@@ -141,9 +196,9 @@ void	render_view(t_game *g)
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{
-		init_ray_for_x(&r, x);
-		perform_dda(g, &r);
-		draw_stripe(g, x, &r);
+		init_ray_for_x(&r, x); // Cast ray for column x from player position
+		perform_dda(g, &r);    // find wall distance
+		draw_stripe(g, x, &r); // draw stripe at column x
 		x++;
 	}
 }
