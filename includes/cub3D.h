@@ -19,7 +19,7 @@ typedef struct s_hero
 	double		angle;
 } t_hero;
 
-	typedef struct s_map
+typedef struct s_map
 {
 	char		*no;
 	char		*so;

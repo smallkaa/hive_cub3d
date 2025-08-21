@@ -6,30 +6,11 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 11:25:16 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/18 20:27:27 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/21 14:57:38 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// void	*ft_memcpy(void *dest, const void *src, size_t n)
-// {
-// 	unsigned char	*d;
-// 	unsigned char	*s;
-// 	size_t			i;
-
-// 	if (!dest && !src)
-// 		return (NULL);
-// 	i = 0;
-// 	d = (unsigned char *)dest;
-// 	s = (unsigned char *)src;
-// 	while (i < n)
-// 	{
-// 		d[i] = s[i];
-// 		i++;
-// 	}
-// 	return (dest);
-// }
 
 char	*str_join(char *s1, const char *s2)
 {
@@ -39,6 +20,8 @@ char	*str_join(char *s1, const char *s2)
 
 	s1_len = 0;
 	s2_len = 0;
+	if ((!s1 || !*s1) && (!s2 || !*s2))
+		return (NULL);
 	while (s1 && s1[s1_len])
 		s1_len++;
 	while (s2[s2_len])
@@ -48,7 +31,8 @@ char	*str_join(char *s1, const char *s2)
 		return (NULL);
 	if (s1)
 		ft_memcpy(result, s1, s1_len);
-	ft_memcpy(result + s1_len, s2, s2_len + 1);
+	if (s2)
+		ft_memcpy(result + s1_len, s2, s2_len + 1);
 	free(s1);
 	return (result);
 }
