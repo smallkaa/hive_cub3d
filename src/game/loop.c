@@ -21,9 +21,8 @@ void	close_game(t_game *game)
 void key_press(mlx_key_data_t keydata, void* param)
 {
 	t_game *game = (t_game *)param;
-	(void)keydata; // Unused parameter
-	
-	close_game(game);
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		close_game(game);
 }
 
 // This is for the window's close button
@@ -34,18 +33,20 @@ void	cleanup_and_exit(void *param)
 }
 void game_update(void *param)
 {
-    t_game *game = (t_game *)param;
-    
-    // Clear the image
-    ft_memset(game->img->pixels, 0, game->img->width * game->img->height * sizeof(uint32_t));
-    
-    // Redraw everything
-    draw_background(game);
-    render_view(game);
+	t_game *game = (t_game *)param;
+
+	handle_movement(game);
+	
+	// Clear the image
+	ft_memset(game->img->pixels, 0, game->img->width * game->img->height * sizeof(uint32_t));
+	
+	// Redraw everything
+	draw_background(game);
+	render_view(game);
 }
 void game_loop(t_game *game)
 {
-    // Initialize MLX42 and create a window
+	// Initialize MLX42 and create a window
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", true);
 	if (!game->mlx)
 	{
@@ -76,7 +77,7 @@ void game_loop(t_game *game)
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 
 	// Register a hook for any key press
-	//mlx_key_hook(game.mlx, &key_press, &game);
+	mlx_key_hook(game->mlx, &key_press, game);
 	
 	// Register a hook for when the user clicks the close button on the window
 	mlx_loop_hook(game->mlx, &game_update, game);

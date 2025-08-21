@@ -122,6 +122,10 @@ void game_loop(t_game *game);
 int	load_all_textures(t_game *g);
 t_face pick_face(t_ray *r);
 uint32_t get_texture_pixel(mlx_texture_t *tex, int x, int y);
+void handle_movement(t_game *game);
+void move_forward_backward(t_game *game, int forward);
+void strafe_left_right(t_game *game, int left);
+void rotate_player(t_game *game, int left);
 
 
 #endif
