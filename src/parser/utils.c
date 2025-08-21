@@ -43,6 +43,7 @@ void free_map(t_map *map)
 	while (map->area[i])
 	{
 		free(map->area[i]);
+		map->area[i] = NULL;
 		i++;
 	}
 	free(map->area);
