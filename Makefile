@@ -42,6 +42,9 @@ SRC = $(SRCS_PATH)/main.c \
 		$(SRCS_PATH)/parser/map_check.c \
 		$(SRCS_PATH)/parser/config.c \
 		$(SRCS_PATH)/parser/read.c \
+		$(SRCS_PATH)/map_utils/access_checker.c \
+		$(SRCS_PATH)/map_utils/bound_checker.c \
+		$(SRCS_PATH)/map_utils/print_map.c \
 
 
 OBJ := $(patsubst $(SRCS_PATH)/%.c, $(OBJS_PATH)/%.o, $(SRC))
@@ -73,6 +76,7 @@ clean:
 	@rm -rf $(OBJS_PATH)
 	@$(MAKE) -C $(LIBFT_PATH) clean
 	@rm -rf $(MLX_PATH)/build
+	@rm sources_dump.txt
 
 fclean: clean
 	/bin/rm -f $(NAME)
