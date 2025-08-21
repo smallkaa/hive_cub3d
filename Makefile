@@ -3,7 +3,7 @@
 NAME = cub3D
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I./includes/ -I./MLX42/include -Wunreachable-code -Ofast
+CFLAGS = -g -Wall -Wextra -Werror -I./includes/ -I./MLX42/include -Wunreachable-code -Ofast
 
 # --- OS Specific Configuration ---
 UNAME_S := $(shell uname -s)
@@ -35,13 +35,18 @@ MLX_REPO = https://github.com/codam-coding-college/MLX42.git
 MLXLIB = MLX42/build/libmlx42.a
 LIBFT = $(LIBFT_PATH)/libft.a
 SRC = $(SRCS_PATH)/main.c \
-		$(SRCS_PATH)/raycast.c \
-		$(SRCS_PATH)/input.c \
+		$(SRCS_PATH)/raycast/raycast.c \
+		$(SRCS_PATH)/raycast/drawback.c \
+		$(SRCS_PATH)/init/keys_init.c \
 		$(SRCS_PATH)/parser/utils.c \
 		$(SRCS_PATH)/parser/parsing.c \
 		$(SRCS_PATH)/parser/map_check.c \
 		$(SRCS_PATH)/parser/config.c \
 		$(SRCS_PATH)/parser/read.c \
+		$(SRCS_PATH)/map_utils/access_checker.c \
+		$(SRCS_PATH)/map_utils/bound_checker.c \
+		$(SRCS_PATH)/map_utils/print_map.c \
+		$(SRCS_PATH)/game/loop.c \
 
 
 OBJ := $(patsubst $(SRCS_PATH)/%.c, $(OBJS_PATH)/%.o, $(SRC))
@@ -73,6 +78,7 @@ clean:
 	@rm -rf $(OBJS_PATH)
 	@$(MAKE) -C $(LIBFT_PATH) clean
 	@rm -rf $(MLX_PATH)/build
+	@rm -f sources_dump.txt
 
 fclean: clean
 	/bin/rm -f $(NAME)
