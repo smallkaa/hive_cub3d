@@ -8,6 +8,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdint.h>
 
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
@@ -89,6 +90,23 @@ typedef struct s_pixel_data
     int			y1;
 }	t_pixel_data;
 
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}				t_point;
+
+typedef struct s_stripe_data
+{
+	int				x;
+	int				height;
+	int				y0;
+	int				y1;
+	t_face			face;
+	mlx_texture_t	*tex;
+	int				tex_x;
+}	t_stripe_data;
+
 // Прототипы
 void init_map(t_map *map);
 void print_map(t_map *map, int player_x, int player_y);
@@ -119,6 +137,7 @@ void			render_view(t_game *game);
 void			setup_input(t_game *game);
 void	draw_background(t_game *game);
 void game_loop(t_game *game);
+bool	is_map_closed(t_map *map);
 
 //game
 int	load_all_textures(t_game *g);
