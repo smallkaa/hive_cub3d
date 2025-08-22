@@ -10,8 +10,8 @@
 # include <stdlib.h>
 # include <stdint.h>
 
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 600
+# define WINDOW_WIDTH 1200
+# define WINDOW_HEIGHT 1000
 
 typedef struct s_hero
 {
@@ -78,9 +78,6 @@ typedef struct s_game
 	t_textures	tx;
 	 t_ray		ray;
 }				t_game;
-
-
-
 
 typedef struct s_pixel_data
 {

@@ -19,9 +19,7 @@ void key_press(mlx_key_data_t keydata, void* param)
 
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		close_game(game);
-
-	//mlx_close_window(game->mlx);
+		mlx_close_window(game->mlx);
 }
 
 void	cleanup_and_exit(void *param)
