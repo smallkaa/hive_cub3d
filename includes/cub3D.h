@@ -94,6 +94,17 @@ typedef struct s_point
 	int	y;
 }				t_point;
 
+typedef struct s_stripe_data
+{
+	int				x;
+	int				height;
+	int				y0;
+	int				y1;
+	t_face			face;
+	mlx_texture_t	*tex;
+	int				tex_x;
+}	t_stripe_data;
+
 // Прототипы
 void init_map(t_map *map);
 void print_map(t_map *map, int player_x, int player_y);
