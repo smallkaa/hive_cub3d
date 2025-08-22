@@ -4,7 +4,7 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include "libft.h"
-# include "minimap.h"
+
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -16,9 +16,15 @@
 # define WAND_W  400
 # define WAND_H  400
 # define WAND "./assets/wand.png"
+# define MINIMAP_RADIUS    60
+# define MINIMAP_SCALE     4
+# define NORTH_POV         0
+# define TILE_SIZE         1
+# define MM_ALPHA(a,r,g,b) ((uint32_t)((a)<<24 | (r)<<16 | (g)<<8 | (b)))
 
-struct s_minimap;
-typedef struct s_minimap t_minimap;
+// struct s_minimap;
+// struct s_game;
+
 typedef struct s_hero
 {
 	double		x;
@@ -40,6 +46,27 @@ typedef struct s_map
 	t_hero		hero;
 	// t_point		exit_pos;
 }				t_map;
+
+typedef struct s_mini
+{
+    float   dx;         // Delta X position
+    float   dy;         // Delta Y position  
+    float   rdx;        // Rotated delta X
+    float   rdy;        // Rotated delta Y
+    float   map_x;      // Map X coordinate
+    float   map_y;      // Map Y coordinate
+    int     tile_x;     // Tile X index
+    int     tile_y;     // Tile Y index
+}               t_mini;
+
+typedef struct s_minimap
+{
+    mlx_image_t *img;
+    int         radius;
+    int         scale;
+    int         center_x;   // Center position on screen
+    int         center_y;
+}               t_minimap;
 
 typedef enum e_face 
 { 
@@ -153,5 +180,7 @@ void move_forward_backward(t_game *game, int forward);
 void strafe_left_right(t_game *game, int left);
 void rotate_player(t_game *game, int left);
 
-
+// Function declarations
+int  minimap_init(t_game *g, t_minimap *mm);
+void minimap_draw(t_game *g, t_minimap *mm);
 #endif

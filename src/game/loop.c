@@ -11,6 +11,12 @@ void	close_game(t_game *game)
 			mlx_delete_texture(game->tx.tex[i]);
 		i++;
 	}
+    if (game->minimap.img)
+    {
+        printf("Cleaning up minimap image\n");
+        // Don't delete the image - MLX will handle it
+        game->minimap.img = NULL;
+    }
 }
 
 void key_press(mlx_key_data_t keydata, void* param)
@@ -35,57 +41,109 @@ void game_update(void *param)
     t_game *game;
 	
 	game = (t_game *)param;
+	if (!game || !game->img)
+        return;
 	handle_movement(game);
     ft_memset(game->img->pixels, 0, game->img->width * game->img->height \
 		* sizeof(uint32_t));
     
     draw_background(game);
     render_view(game);
-	minimap_draw(game, &game->minimap);
+	printf("Updating minimap...\n");  // Debug line
+	 if (game->minimap.img)
+        minimap_draw(game, &game->minimap);
 }
 
+// void game_loop(t_game *game)
+// {
+// 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", true);
+// 	if (!game->mlx)
+// 		return (err_msg("Failed to initialize MLX"));
+
+// 	setup_input(game);
+
+// 	if (load_all_textures(game) < 0)
+// 		return (mlx_terminate(game->mlx));
+
+// 	game->img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+// 	if (!game->img)
+// 	{
+// 		mlx_terminate(game->mlx);
+// 		return (err_msg("Failed to create image"));
+// 	}
+// 	draw_background(game);
+// 	render_view(game);
+// 	mlx_image_to_window(game->mlx, game->img, 0, 0);
+// 	//mlx_image_to_window(game->mlx, game->wand,  WINDOW_WIDTH - WAND_W - 10,
+// 	if (minimap_init(game, &game->minimap) < 0)
+// 	{
+//     	mlx_terminate(game->mlx);
+//     	return (err_msg("minimap init failed"));
+// 	}
+// 	mlx_image_to_window(game->mlx, game->wand, 400, 650);
+
+
+// 	// Register a hook for any key press
+// 	mlx_key_hook(game->mlx, &key_press, game);
+	
+// 	// Register a hook for when the user clicks the close button on the window
+	
+// 	// Регистрируем хуки
+// 	mlx_loop_hook(game->mlx, &game_update, game);
+// 	mlx_close_hook(game->mlx, &cleanup_and_exit, game);
+
+// 	// Запускаем цикл обработки событий MLX
+// 	mlx_loop(game->mlx);
+	
+// 	// Эта часть кода выполняется ПОСЛЕ завершения mlx_loop
+// 	close_game(game);         // Сначала освобождаем ресурсы игры
+// 	mlx_terminate(game->mlx); // В самом конце завершаем работу MLX
+// }
 void game_loop(t_game *game)
 {
-	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", true);
-	if (!game->mlx)
-		return (err_msg("Failed to initialize MLX"));
+    game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", true);
+    if (!game->mlx)
+        return (err_msg("Failed to initialize MLX"));
 
-	setup_input(game);
+    setup_input(game);
 
-	if (load_all_textures(game) < 0)
-		return (mlx_terminate(game->mlx));
+    if (load_all_textures(game) < 0)
+        return (mlx_terminate(game->mlx));
 
-	game->img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (!game->img)
-	{
-		mlx_terminate(game->mlx);
-		return (err_msg("Failed to create image"));
-	}
-	if (minimap_init(game, &game->minimap) < 0)
-	{
-    	mlx_terminate(game->mlx);
-    	return (err_msg("minimap init failed"));
-	}
-	draw_background(game);
-	render_view(game);
-	mlx_image_to_window(game->mlx, game->img, 0, 0);
-	//mlx_image_to_window(game->mlx, game->wand,  WINDOW_WIDTH - WAND_W - 10,
-	mlx_image_to_window(game->mlx, game->wand, 400, 650);
+    game->img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+    if (!game->img)
+    {
+        mlx_terminate(game->mlx);
+        return (err_msg("Failed to create image"));
+    }
+    
+    draw_background(game);
+    render_view(game);
+    mlx_image_to_window(game->mlx, game->img, 0, 0);
+    
+    // ✅ ENABLE MAIN IMAGE (this is safe)
+    game->img->enabled = true;
+    printf("Main image enabled\n");
+    
+    if (minimap_init(game, &game->minimap) < 0)
+    {
+        mlx_terminate(game->mlx);
+        return (err_msg("minimap init failed"));
+    }
+    
+    mlx_image_to_window(game->mlx, game->wand, 400, 650);
+    
+    // ✅ ENABLE WAND IMAGE
+    game->wand->enabled = true;
+    printf("Wand image enabled\n");
 
+    // Register hooks
+    mlx_key_hook(game->mlx, &key_press, game);
+    mlx_loop_hook(game->mlx, &game_update, game);
+    mlx_close_hook(game->mlx, &cleanup_and_exit, game);
 
-	// Register a hook for any key press
-	mlx_key_hook(game->mlx, &key_press, game);
-	
-	// Register a hook for when the user clicks the close button on the window
-	
-	// Регистрируем хуки
-	mlx_loop_hook(game->mlx, &game_update, game);
-	mlx_close_hook(game->mlx, &cleanup_and_exit, game);
-
-	// Запускаем цикл обработки событий MLX
-	mlx_loop(game->mlx);
-	
-	// Эта часть кода выполняется ПОСЛЕ завершения mlx_loop
-	close_game(game);         // Сначала освобождаем ресурсы игры
-	mlx_terminate(game->mlx); // В самом конце завершаем работу MLX
+    mlx_loop(game->mlx);
+    
+    close_game(game);
+    mlx_terminate(game->mlx);
 }

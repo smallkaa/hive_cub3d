@@ -1,102 +1,227 @@
-#include "minimap.h"
+#include "cub3D.h"
 
+// Safe pixel putting function with bounds checking
+// static void mm_put(mlx_image_t *img, int x, int y, uint32_t color)
+// {
+//     if (x >= 0 && x < (int)img->width && y >= 0 && y < (int)img->height)
+//         mlx_put_pixel(img, x, y, color);
+// }
 
-// safe put_pixel (clamped)
-static inline void mm_put(mlx_image_t *img, int x, int y, uint32_t c)
+// static void mini_init(t_mini *mini)
+// {
+//     mini->dx = -MINIMAP_RADIUS;
+//     mini->dy = -MINIMAP_RADIUS; 
+//     mini->rdx = 0;
+//     mini->rdy = 0;
+//     mini->map_x = 0;
+//     mini->map_y = 0;
+//     mini->tile_x = 0;
+//     mini->tile_y = 0;
+// }
+
+// static void get_tile(t_game *game, t_mini *mini)
+// {
+//     float rotation_angle;
+
+//     rotation_angle = -game->map->hero.angle * M_PI / 180.0 + NORTH_POV;
+    
+//     mini->rdx = mini->dx * cosf(-rotation_angle) - mini->dy * sinf(-rotation_angle);
+//     mini->rdy = mini->dx * sinf(-rotation_angle) + mini->dy * cosf(-rotation_angle);
+    
+//     mini->map_x = game->map->hero.x + mini->rdx / (float)MINIMAP_SCALE;
+//     mini->map_y = game->map->hero.y + mini->rdy / (float)MINIMAP_SCALE;
+    
+//     mini->tile_x = (mini->map_x >= 0) ? (int)mini->map_x : (int)floorf(mini->map_x);
+//     mini->tile_y = (mini->map_y >= 0) ? (int)mini->map_y : (int)floorf(mini->map_y);
+// }
+
+// static void put_pixel_mini(t_game *game, t_mini *mini)
+// {
+//     uint32_t color;
+//     int screen_x, screen_y;
+    
+//     if (mini->tile_y < 0 || mini->tile_y >= game->map->size_y || 
+//         mini->tile_x < 0 || mini->tile_x >= (int)ft_strlen(game->map->area[mini->tile_y]))
+//     {
+//         color = MM_ALPHA(255, 100, 100, 100);  // Gray - more visible
+//     }
+//     else
+//     {
+//         char cell = game->map->area[mini->tile_y][mini->tile_x];
+//         if (cell == '1')
+//             color = MM_ALPHA(255, 255, 255, 255);  // ✅ WHITE walls - very visible
+//         else if (cell == '0' || cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W')
+//             color = MM_ALPHA(255, 0, 255, 0);      // ✅ GREEN floor - very visible
+//         else
+//             color = MM_ALPHA(255, 100, 100, 100);
+//     }
+    
+//     screen_x = (int)mini->dx + MINIMAP_RADIUS;
+//     screen_y = (int)mini->dy + MINIMAP_RADIUS;
+    
+//     mm_put(game->minimap.img, screen_x, screen_y, color);
+// }
+
+// static void put_dot(mlx_image_t *img, int x, int y, uint32_t color)
+// {
+//     for (int dy = -1; dy <= 1; dy++)
+//         for (int dx = -1; dx <= 1; dx++)
+//             mm_put(img, x + dx, y + dy, color);
+// }
+
+// static void clean_minimap(t_game *game)
+// {
+//     // ✅ Use BRIGHT RED background for debugging
+//     //uint32_t bg_color = MM_ALPHA(255, 255, 0, 0);  // Bright red
+// 	uint32_t bg_color = 0xFF000000; 
+    
+//     printf("Cleaning minimap - size: %dx%d\n", 
+//            (int)game->minimap.img->width, (int)game->minimap.img->height);
+    
+//     for (int y = 0; y < (int)game->minimap.img->height; y++)
+//         for (int x = 0; x < (int)game->minimap.img->width; x++)
+//             mlx_put_pixel(game->minimap.img, x, y, bg_color);
+// }
+
+// static void put_minimap(t_game *game)
+// {
+//     t_mini mini;
+    
+//     mini_init(&mini);
+//     mini.dy = -MINIMAP_RADIUS;
+    
+//     while (mini.dy < MINIMAP_RADIUS)
+//     {
+//         mini.dx = -MINIMAP_RADIUS;
+//         while (mini.dx < MINIMAP_RADIUS)
+//         {
+//             if (mini.dx * mini.dx + mini.dy * mini.dy > MINIMAP_RADIUS * MINIMAP_RADIUS)
+//             {
+//                 mini.dx++;
+//                 continue;
+//             }
+            
+//             get_tile(game, &mini);
+            
+//             if (mini.tile_y >= 0 && mini.tile_y < game->map->size_y &&
+//                 mini.tile_x >= 0 && mini.tile_x < game->map->size_x)
+//             {
+//                 put_pixel_mini(game, &mini);
+//             }
+//             mini.dx++;
+//         }
+//         mini.dy++;
+//     }
+// }
+
+// void minimap_draw(t_game *g, t_minimap *mm)
+// {
+//     clean_minimap(g);
+//     put_minimap(g);
+//     put_dot(mm->img, MINIMAP_RADIUS, MINIMAP_RADIUS, MM_ALPHA(255, 0, 255, 0));
+    
+//     float angle = g->map->hero.angle * M_PI / 180.0;
+//     int dir_x = MINIMAP_RADIUS + (int)(cos(angle - M_PI_2) * 15);
+//     int dir_y = MINIMAP_RADIUS + (int)(sin(angle - M_PI_2) * 15);
+    
+//     int steps = 15;
+//     for (int i = 0; i <= steps; i++)
+//     {
+//         int x = MINIMAP_RADIUS + (i * (dir_x - MINIMAP_RADIUS)) / steps;
+//         int y = MINIMAP_RADIUS + (i * (dir_y - MINIMAP_RADIUS)) / steps;
+//         mm_put(mm->img, x, y, MM_ALPHA(255, 255, 255, 0));
+//     }
+// 	printf("Drawing SIMPLE test minimap...\n");
+ 
+// }
+void minimap_draw(t_game *g, t_minimap *mm)
 {
-	if ((unsigned)x < img->width && (unsigned)y < img->height)
-		mlx_put_pixel(img, x, y, c);
+    printf("Drawing VISIBLE test minimap...\n");
+     (void)g; 
+    // Fill entire minimap with BRIGHT SOLID COLORS
+    for (int y = 0; y < (int)mm->img->height; y++)
+    {
+        for (int x = 0; x < (int)mm->img->width; x++)
+        {
+            uint32_t color;
+            
+            // Create a very visible pattern
+            if (x < 5 || x >= (int)mm->img->width - 5 || 
+                y < 5 || y >= (int)mm->img->height - 5)
+            {
+                // Thick red border
+                color = 0xFF0000FF;  // SOLID RED
+            }
+            else if ((x / 10 + y / 10) % 2 == 0)
+            {
+                // White checkerboard
+                color = 0xFFFFFFFF;  // SOLID WHITE
+            }
+            else
+            {
+                // Blue checkerboard
+                color = 0xFF0000FF;  // SOLID BLUE (wait, this should be different)
+                color = 0x0000FFFF;  // SOLID BLUE
+            }
+            
+            mlx_put_pixel(mm->img, x, y, color);
+        }
+    }
+    
+    // Draw a big yellow center dot (player position)
+    for (int dy = -10; dy <= 10; dy++)
+    {
+        for (int dx = -10; dx <= 10; dx++)
+        {
+            if (dx * dx + dy * dy <= 100)  // Circle
+            {
+                int px = mm->img->width / 2 + dx;
+                int py = mm->img->height / 2 + dy;
+                if (px >= 0 && px < (int)mm->img->width && 
+                    py >= 0 && py < (int)mm->img->height)
+                    mlx_put_pixel(mm->img, px, py, 0xFFFF00FF);  // SOLID YELLOW
+            }
+        }
+    }
+    
+    printf("Highly visible test pattern drawn!\n");
 }
 
 int minimap_init(t_game *g, t_minimap *mm)
 {
-	// total pixels needed from map size
-	mm->w = g->map->size_x * MM_TILE;
-	mm->h = g->map->size_y * MM_TILE;
+    int diameter = MINIMAP_RADIUS * 2;
+    mm->radius = MINIMAP_RADIUS;
+    mm->scale = MINIMAP_SCALE;
+    mm->center_x = MINIMAP_RADIUS + 20;
+    mm->center_y = MINIMAP_RADIUS + 20;
+    
+    printf("=== MINIMAP INIT DEBUG ===\n");
+    printf("Diameter: %d\n", diameter);
+    printf("Position: (%d, %d)\n", 20, 20);
+    printf("Window size: %dx%d\n", WINDOW_WIDTH, WINDOW_HEIGHT);
+    
+    mm->img = mlx_new_image(g->mlx, diameter, diameter);
+    if (!mm->img)
+    {
+        printf("ERROR: Failed to create minimap image!\n");
+        return (-1);
+    }
+    printf("Minimap image created: %dx%d\n", (int)mm->img->width, (int)mm->img->height);
 
-	// keep it on screen even for big maps (optional: clip to max size)
-	// If you want clipping, you can compute min(width, some_limit).
+    // Try top-right corner instead of top-left
+    if (mlx_image_to_window(g->mlx, mm->img, 20, 20) < 0)
+    {
+        printf("ERROR: Failed to add minimap to window!\n");
+        return (-1);
+    }
+    printf("Minimap added to window at top-right corner\n");
 
-	mm->ox = MM_MARGIN_X;
-	mm->oy = MM_MARGIN_Y;
-
-	mm->img = mlx_new_image(g->mlx, mm->w, mm->h);
-	if (!mm->img)
-		return (err_msg("minimap: mlx_new_image failed"), -1);
-
-	// Add once; we’ll just repaint pixels inside it every frame
-	if (mlx_image_to_window(g->mlx, mm->img, mm->ox, mm->oy) < 0)
-		return (err_msg("minimap: image_to_window failed"), -1);
-
-	// draw first frame now
-	minimap_draw(g, mm);
-	return 0;
-}
-
-void minimap_draw(t_game *g, t_minimap *mm)
-{
-	// Colors (ARGB)
-	const uint32_t col_bg   = MM_ALPHA(120,  10,  10,  25); // semi‑transparent background
-	const uint32_t col_wall = MM_ALPHA(255,  60,  60,  70);
-	const uint32_t col_void = MM_ALPHA(80,   15,  15,  20); // outside map spaces
-	const uint32_t col_floor= MM_ALPHA(80,   25,  25,  35);
-	const uint32_t col_me   = MM_ALPHA(255, 230, 220,  40); // player dot
-	const uint32_t col_dir  = MM_ALPHA(255, 250, 240, 140); // facing line
-
-	// Clear (semi‑transparent)
-	for (int y = 0; y < mm->h; ++y)
-		for (int x = 0; x < mm->w; ++x)
-			mlx_put_pixel(mm->img, x, y, col_bg);
-
-	// Draw map cells as blocks of MM_TILE x MM_TILE
-	for (int my = 0; my < g->map->size_y; ++my)
-	{
-		const char *row = g->map->area[my];
-		int rowlen = row ? (int)ft_strlen(row) : 0;
-
-		for (int mx = 0; mx < g->map->size_x; ++mx)
-		{
-			uint32_t c = col_void;
-			char cell = (mx < rowlen && row) ? row[mx] : ' '; // outside row -> void
-
-			if (cell == '1')
-				c = col_wall;
-			else if (cell == '0' || cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W')
-				c = col_floor;
-			else if (cell == ' ')
-				c = col_void;
-
-			int px0 = mx * MM_TILE;
-			int py0 = my * MM_TILE;
-			for (int yy = 0; yy < MM_TILE; ++yy)
-				for (int xx = 0; xx < MM_TILE; ++xx)
-					mm_put(mm->img, px0 + xx, py0 + yy, c);
-		}
-	}
-
-	// Player dot
-	double px = g->map->hero.x * MM_TILE;
-	double py = g->map->hero.y * MM_TILE;
-
-	// small 3x3 dot
-	for (int dy = -1; dy <= 1; ++dy)
-		for (int dx = -1; dx <= 1; ++dx)
-			mm_put(mm->img, (int)(px + dx), (int)(py + dy), col_me);
-
-	// Facing line
-	double rad = g->map->hero.angle * M_PI / 180.0;
-	double ex = px + cos(rad + M_PI_2) * MM_FOV_LEN; // NOTE: your forward uses sin/cos swapped
-	double ey = py + sin(rad + M_PI_2) * MM_FOV_LEN; // rotate 90° to match your forward vector
-
-	// simple DDA for the small line
-	int steps = (int)fmax(fabs(ex - px), fabs(ey - py));
-	if (steps < 1) steps = 1;
-	double stepx = (ex - px) / steps;
-	double stepy = (ey - py) / steps;
-	double cx = px, cy = py;
-	for (int i = 0; i <= steps; ++i)
-	{
-		mm_put(mm->img, (int)cx, (int)cy, col_dir);
-		cx += stepx; cy += stepy;
-	}
+    // ✅ ADD THIS AFTER mlx_image_to_window:
+    mm->img->instances[0].z = 10000;  // Put minimap on top of everything
+	mm->img->enabled = true; 
+    printf("Minimap Z-order set to 1000\n");
+    
+    minimap_draw(g, mm);
+    printf("=== MINIMAP INIT COMPLETE ===\n");
+    return (0);
 }
