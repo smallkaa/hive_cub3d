@@ -119,7 +119,6 @@ static void	draw_stripe(t_game *g, int x, t_ray *r)
 	wall_x -= floor(wall_x); // Оставляем только дробную часть (от 0.0 до 1.0)
 
 	// 2. Передаем wall_x в draw_wall_pixel (нужно будет изменить эту функцию)
-	// (Для простоты я вставлю логику прямо сюда)
 	t_face			face = pick_face(r);
 	mlx_texture_t	*texture = g->tx.tex[face];
 	
