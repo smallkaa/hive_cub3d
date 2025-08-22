@@ -119,49 +119,51 @@ static int	calculate_texture_x(t_ray *r, mlx_texture_t *tex)
 	return (tex_x);
 }
 
-/*
-** Draws a single textured pixel on the screen image.
-*/
-static void	draw_textured_pixel(t_game *g, t_stripe_data *stripe, int y)
+static void	init_stripe(t_game *g, t_ray *r, t_stripe_data *s)
 {
+	s->height = (int)((double)WINDOW_HEIGHT / r->perp);
+	s->y0 = -s->height / 2 + WINDOW_HEIGHT / 2 - CAMERA_PITCH;
+	s->y1 = s->height / 2 + WINDOW_HEIGHT / 2 - CAMERA_PITCH;
+	s->face = pick_face(r);
+	s->tex = g->tx.tex[s->face];
+	s->tex_x = calculate_texture_x(r, s->tex);
+}
+
+static void	draw_texture_column(t_game *g, t_stripe_data *s, int x)
+{
+	double		tex_pos;
+	double		tex_step;
+	int			y;
 	int			tex_y;
 	uint32_t	color;
 
-	tex_y = (int)(((double)(y - stripe->y0) / (double)stripe->height) \
-		* stripe->tex->height);
-	if (tex_y >= (int)stripe->tex->height)
-		tex_y = stripe->tex->height - 1;
-	color = get_texture_pixel(stripe->tex, stripe->tex_x, tex_y);
-	mlx_put_pixel(g->img, stripe->x, y, color);
-}
-
-/*
-** Draw one vertical stripe of a wall.
-*/
-static void	draw_stripe(t_game *g, int x, t_ray *r)
-{
-	t_stripe_data	stripe;
-	int				y;
-
-	stripe.height = (int)((double)WINDOW_HEIGHT / r->perp);
-	stripe.y0 = -stripe.height / 2 + WINDOW_HEIGHT / 2 - CAMERA_PITCH;
-	if (stripe.y0 < 0)
-		stripe.y0 = 0;
-	stripe.y1 = stripe.height / 2 + WINDOW_HEIGHT / 2 - CAMERA_PITCH;
-	if (stripe.y1 >= WINDOW_HEIGHT)
-		stripe.y1 = WINDOW_HEIGHT - 1;
-	stripe.face = pick_face(r);
-	stripe.tex = g->tx.tex[stripe.face];
-	if (!stripe.tex)
-		return ;
-	stripe.tex_x = calculate_texture_x(r, stripe.tex);
-	stripe.x = x;
-	y = stripe.y0;
-	while (y <= stripe.y1)
+	tex_step = 1.0 * s->tex->height / s->height;
+	tex_pos = 0.0;
+	if (s->y0 < 0)
+		tex_pos = -s->y0 * tex_step;
+	y = s->y0;
+	if (y < 0)
+		y = 0;
+	while (y <= s->y1 && y < WINDOW_HEIGHT)
 	{
-		draw_textured_pixel(g, &stripe, y);
+		tex_y = (int)tex_pos;
+		if (tex_y >= (int)s->tex->height)
+			tex_y = s->tex->height - 1;
+		color = get_texture_pixel(s->tex, s->tex_x, tex_y);
+		mlx_put_pixel(g->img, x, y, color);
+		tex_pos += tex_step;
 		y++;
 	}
+}
+
+static void	draw_stripe(t_game *g, int x, t_ray *r)
+{
+	t_stripe_data	s;
+
+	init_stripe(g, r, &s);
+	if (!s.tex)
+		return ;
+	draw_texture_column(g, &s, x);
 }
 
 /*
