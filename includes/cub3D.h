@@ -4,6 +4,7 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include "libft.h"
+# include "minimap.h"
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -16,6 +17,8 @@
 # define WAND_H  400
 # define WAND "./assets/wand.png"
 
+struct s_minimap;
+typedef struct s_minimap t_minimap;
 typedef struct s_hero
 {
 	double		x;
@@ -73,15 +76,6 @@ typedef struct s_ray
 	double	perp;
 }	t_ray;
 
-// typedef struct mlx_instance
-// {
-//     int32_t x;
-//     int32_t y;
-//     bool enabled;
-//     int32_t z;
-//     // rotation, scale are not present
-// } mlx_instance_t;
-
 typedef struct s_game
 {
 	mlx_t		*mlx;
@@ -90,6 +84,7 @@ typedef struct s_game
 	t_map		*map;
 	t_textures	tx;
 	t_ray		ray;
+	t_minimap	minimap; // delete it from mandotory part
 }				t_game;
 
 typedef struct s_pixel_data

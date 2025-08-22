@@ -41,6 +41,7 @@ void game_update(void *param)
     
     draw_background(game);
     render_view(game);
+	minimap_draw(game, &game->minimap);
 }
 
 void game_loop(t_game *game)
@@ -59,6 +60,11 @@ void game_loop(t_game *game)
 	{
 		mlx_terminate(game->mlx);
 		return (err_msg("Failed to create image"));
+	}
+	if (minimap_init(game, &game->minimap) < 0)
+	{
+    	mlx_terminate(game->mlx);
+    	return (err_msg("minimap init failed"));
 	}
 	draw_background(game);
 	render_view(game);
