@@ -1,14 +1,14 @@
-NO ./assets/1.png
-SO ./assets/3.png
-WE ./assets/2.png
-EA ./assets/1.png
+NO ./assets/5.png
+SO ./assets/6.png
+WE ./assets/7.png
+EA ./assets/8.png
 
 F 220,100,0
 C 225,30,0
 
 11111111
 1E001001
-11111001
+10001001
 10000001
 11100111
 10000001

@@ -16,10 +16,10 @@ void	close_game(t_game *game)
 void key_press(mlx_key_data_t keydata, void* param)
 {
 	t_game *game;
-	
+
 	game = (t_game *)param;
-	(void)keydata;
-	mlx_close_window(game->mlx);
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(game->mlx);
 }
 
 void	cleanup_and_exit(void *param)
@@ -35,6 +35,7 @@ void game_update(void *param)
     t_game *game;
 	
 	game = (t_game *)param;
+	handle_movement(game);
     ft_memset(game->img->pixels, 0, game->img->width * game->img->height \
 		* sizeof(uint32_t));
     
@@ -47,9 +48,12 @@ void game_loop(t_game *game)
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", true);
 	if (!game->mlx)
 		return (err_msg("Failed to initialize MLX"));
+
 	setup_input(game);
+
 	if (load_all_textures(game) < 0)
 		return (mlx_terminate(game->mlx));
+
 	game->img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!game->img)
 	{
@@ -59,6 +63,11 @@ void game_loop(t_game *game)
 	draw_background(game);
 	render_view(game);
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
+
+	// Register a hook for any key press
+	mlx_key_hook(game->mlx, &key_press, game);
+	
+	// Register a hook for when the user clicks the close button on the window
 	
 	// Регистрируем хуки
 	mlx_loop_hook(game->mlx, &game_update, game);

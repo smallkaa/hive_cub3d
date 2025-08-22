@@ -10,8 +10,8 @@
 # include <stdlib.h>
 # include <stdint.h>
 
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 600
+# define WINDOW_WIDTH 1200
+# define WINDOW_HEIGHT 1000
 
 typedef struct s_hero
 {
@@ -48,16 +48,6 @@ typedef struct s_textures
 	mlx_texture_t *tex[4];   // NO, SO, WE, EA (raw PNGs)
 } t_textures;
 
-typedef struct s_game
-{
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_map		*map;
-	t_textures	tx;
-}				t_game;
-
-
-
 typedef struct s_ray
 {
 	double	posx;
@@ -79,6 +69,15 @@ typedef struct s_ray
 	int		side;
 	double	perp;
 }	t_ray;
+
+typedef struct s_game
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_map		*map;
+	t_textures	tx;
+	 t_ray		ray;
+}				t_game;
 
 typedef struct s_pixel_data
 {
@@ -141,6 +140,10 @@ bool	is_map_closed(t_map *map);
 int	load_all_textures(t_game *g);
 t_face pick_face(t_ray *r);
 uint32_t get_texture_pixel(mlx_texture_t *tex, int x, int y);
+void handle_movement(t_game *game);
+void move_forward_backward(t_game *game, int forward);
+void strafe_left_right(t_game *game, int left);
+void rotate_player(t_game *game, int left);
 
 
 #endif
