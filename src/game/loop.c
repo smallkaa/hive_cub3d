@@ -1,6 +1,5 @@
 #include "cub3D.h"
 
-// Эта функция теперь только освобождает ресурсы игры (текстуры).
 void	close_game(t_game *game)
 {
 	int i;
@@ -12,27 +11,22 @@ void	close_game(t_game *game)
 			mlx_delete_texture(game->tx.tex[i]);
 		i++;
 	}
-	// УБИРАЕМ mlx_terminate ОТСЮДА. ЭТО ГЛАВНАЯ ПРИЧИНА ПАДЕНИЯ.
 }
 
-// Эта функция будет вызвана при нажатии клавиши (сейчас не используется)
 void key_press(mlx_key_data_t keydata, void* param)
 {
 	t_game *game;
 	
 	game = (t_game *)param;
 	(void)keydata;
-	// Правильное действие для выхода по клавише - также закрыть окно.
 	mlx_close_window(game->mlx);
 }
 
-// Эта функция теперь правильно обрабатывает закрытие окна.
 void	cleanup_and_exit(void *param)
 {
 	t_game *game;
 
 	game = (t_game *)param;
-	// Просто даём сигнал mlx_loop, что нужно завершиться.
 	mlx_close_window(game->mlx);
 }
 
@@ -41,11 +35,9 @@ void game_update(void *param)
     t_game *game;
 	
 	game = (t_game *)param;
-    // Очищаем изображение
     ft_memset(game->img->pixels, 0, game->img->width * game->img->height \
 		* sizeof(uint32_t));
     
-    // Перерисовываем всё
     draw_background(game);
     render_view(game);
 }
