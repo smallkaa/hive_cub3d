@@ -3,6 +3,7 @@
 /* Tiny epsilon for divisions */
 #define BIG_NUM 1e30
 #define FOV_DEG 60.0
+#define CAMERA_PITCH 90
 
 /* Return 1 if outside or wall/void, else 0 */
 static int	map_is_wall(t_map *m, int x, int y)
@@ -143,10 +144,10 @@ static void	draw_stripe(t_game *g, int x, t_ray *r)
 	int				y;
 
 	stripe.height = (int)((double)WINDOW_HEIGHT / r->perp);
-	stripe.y0 = -stripe.height / 2 + WINDOW_HEIGHT / 2;
+	stripe.y0 = -stripe.height / 2 + WINDOW_HEIGHT / 2 - CAMERA_PITCH;
 	if (stripe.y0 < 0)
 		stripe.y0 = 0;
-	stripe.y1 = stripe.height / 2 + WINDOW_HEIGHT / 2;
+	stripe.y1 = stripe.height / 2 + WINDOW_HEIGHT / 2 - CAMERA_PITCH;
 	if (stripe.y1 >= WINDOW_HEIGHT)
 		stripe.y1 = WINDOW_HEIGHT - 1;
 	stripe.face = pick_face(r);
