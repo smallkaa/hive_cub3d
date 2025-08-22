@@ -12,6 +12,9 @@
 
 # define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 1000
+# define WAND_W  400
+# define WAND_H  400
+# define WAND "./assets/wand.png"
 
 typedef struct s_hero
 {
@@ -70,13 +73,23 @@ typedef struct s_ray
 	double	perp;
 }	t_ray;
 
+// typedef struct mlx_instance
+// {
+//     int32_t x;
+//     int32_t y;
+//     bool enabled;
+//     int32_t z;
+//     // rotation, scale are not present
+// } mlx_instance_t;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	mlx_image_t	*wand;
 	t_map		*map;
 	t_textures	tx;
-	 t_ray		ray;
+	t_ray		ray;
 }				t_game;
 
 typedef struct s_pixel_data

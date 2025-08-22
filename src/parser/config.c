@@ -54,7 +54,7 @@ uint32_t	parse_color(const char *str)
 	i = skip_spaces(str, i);
 	if (str[i] != '\0' && str[i] != '\n') // nothing extra allowed
 		return (0xFFFFFFFF);
-	return ((255 << 24) | (r << 16) | (g << 8) | b);
+	return ((r << 24) | (g << 16) | (b << 8) | 0xFF);
 }
 
 static int	set_path(char **dst, const char *rhs)
