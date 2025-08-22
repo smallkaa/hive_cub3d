@@ -96,6 +96,11 @@ t_map *parsing_args(char *filename)
 		free_map(map);
 		return (NULL);
 	}
+	if(!is_map_closed(map))
+	{
+		free_map(map);
+		return (NULL);
+	}
 	return (map);
 }
 // t_map	*parsing_args(char *filename)
