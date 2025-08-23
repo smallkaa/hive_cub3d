@@ -322,9 +322,9 @@ void handle_movement(t_game *game)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 		move_forward_backward(game, 0);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-		move_left_right(game, 0); // D = right
+		move_left_right(game, 1); // D = right
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-		move_left_right(game, 1); // A = left
+		move_left_right(game, 0); // A = left
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		rotate_player(game, 0);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
