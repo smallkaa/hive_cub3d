@@ -16,6 +16,8 @@
 #define NORTH_POV         0     // North orientation
 #define TILE_SIZE         1     // Your grid tile
 
+# define MINIMAP_TILE 6      // размер клетки на миникарте (в пикселях)
+# define MINIMAP_MARGIN 10
 
 
 typedef struct s_mini
@@ -41,6 +43,7 @@ typedef struct s_minimap
 
 int  minimap_init(t_game *g);
 
-void minimap_draw(void *param);
+void draw_minimap(t_game *game);
+
 
 #endif

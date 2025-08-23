@@ -70,6 +70,7 @@ static int parse_config_section(t_map *map)
 
 static int validate_map_section(t_map *map, int map_start)
 {
+	printf("map start %d\n", map_start);
 	if (symbols_check(map, map_start) < 0)
 		return (-1);
 	if (player_check(map, map_start) < 0)
@@ -77,6 +78,26 @@ static int validate_map_section(t_map *map, int map_start)
 	// Add more validation functions here if needed
 	return (1);
 }
+
+int find_map_size(t_map *map, int map_start)
+{
+	int y = map_start;
+	int max_x = 0;
+
+	printf("map start %d\n", map_start);
+	while (map->area[y])
+	{
+		int len = ft_strlen(map->area[y]);
+		if (len > max_x)
+			max_x = len;
+		y++;
+	}
+
+	map->map_y = y - map_start; // высота только карты
+	map->map_x = max_x;         // максимальная ширина строки карты
+	return (1);
+}
+
 t_map *parsing_args(char *filename)
 {
 	t_map	*map;
@@ -91,6 +112,7 @@ t_map *parsing_args(char *filename)
 		free_map(map);
 		return (NULL);
 	}
+	find_map_size(map, map_start);
 	if (validate_map_section(map, map_start) < 0)
 	{
 		free_map(map);

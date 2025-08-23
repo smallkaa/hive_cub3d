@@ -20,7 +20,10 @@ int	main(int ac, char **av)
 	printf("EA: %s\n", map->ea);
 	printf("Floor color: %u\n", map->floor_c);
 	printf("Ceil color: %u\n", map->ceil_c);
-	printf("map size %d\n", map->size_y);
+	printf("full map size_y %d\n", map->size_y);
+	printf("map_x %d\n", map->map_x);
+	printf("map_y %d\n", map->map_y);
+	printf("full map size_y 2%d\n", map->size_y);
 	printf("Player position x- %f y - %f\n, angle - %f\n", map->hero.x, map->hero.y, map->hero.angle);
 	for(int i = 0; map->area[i]; i++)
 		printf("%s\n", map->area[i]);

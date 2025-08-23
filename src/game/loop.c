@@ -49,8 +49,9 @@ void game_update(void *param)
     
     draw_background(game);
     render_view(game);
+
 	printf("Updating minimap...\n");  // Debug line
-    // minimap_draw(game);
+    draw_minimap(game);
 }
 
 // void game_loop(t_game *game)
@@ -124,13 +125,16 @@ void game_loop(t_game *game)
     game->img->enabled = true;
     printf("Main image enabled\n");
     
-    if (minimap_init(game) < 0)
-    {
-        mlx_terminate(game->mlx);
-        return (err_msg("minimap init failed"));
-    }
+    // if (minimap_init(game) < 0)
+    // {
+    //     mlx_terminate(game->mlx);
+    //     return (err_msg("minimap init failed"));
+    // }
     mlx_image_to_window(game->mlx, game->wand, 400, 650);
-    mlx_image_to_window(game->mlx, game->minimap, 100, 700);
+    game->minimap = mlx_new_image(game->mlx, MINIMAP_MARGIN * 2 + game->map->size_x * MINIMAP_TILE, MINIMAP_MARGIN * 2 + game->map->size_y * MINIMAP_TILE);
+
+    mlx_image_to_window(game->mlx, game->minimap, 0, 0);
+    //mlx_image_to_window(game->mlx, game->minimap, 100, 700);
     
     
     // ✅ ENABLE WAND IMAGE
@@ -139,7 +143,7 @@ void game_loop(t_game *game)
     
     // Register hooks
     mlx_key_hook(game->mlx, &key_press, game);
-    mlx_loop_hook(game->mlx, &minimap_draw, game);
+    //mlx_loop_hook(game->mlx, &minimap_draw, game);
     mlx_loop_hook(game->mlx, &game_update, game);
  
     

@@ -21,6 +21,8 @@ typedef struct s_map
 	char		**area;
 	int			size_x;
 	int			size_y;
+	int			map_x;
+	int			map_y;
 	t_hero		hero;
 	// t_point		exit_pos;
 }				t_map;
