@@ -50,6 +50,7 @@ SRC = $(SRCS_PATH)/main.c \
 		$(SRCS_PATH)/map_utils/print_map.c \
 		$(SRCS_PATH)/game/loop.c \
 		$(SRCS_PATH)/game/movement.c \
+		$(SRCS_PATH)/game/game_utils.c \
 
 
 OBJ := $(patsubst $(SRCS_PATH)/%.c, $(OBJS_PATH)/%.o, $(SRC))

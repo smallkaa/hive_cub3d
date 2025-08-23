@@ -64,7 +64,7 @@ void game_loop(t_game *game)
 	render_view(game);
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 	//mlx_image_to_window(game->mlx, game->wand,  WINDOW_WIDTH - WAND_W - 10,
-	mlx_image_to_window(game->mlx, game->wand, 400, 650);
+	mlx_image_to_window(game->mlx, game->wand, 400, 500);
 
 
 	// Register a hook for any key press

@@ -10,6 +10,7 @@
 # include <stdlib.h>
 # include <stdint.h>
 
+#define TILE_SIZE 64
 # define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 1000
 # define WAND_W  400
@@ -155,8 +156,9 @@ t_face pick_face(t_ray *r);
 uint32_t get_texture_pixel(mlx_texture_t *tex, int x, int y);
 void handle_movement(t_game *game);
 void move_forward_backward(t_game *game, int forward);
-void strafe_left_right(t_game *game, int left);
+void move_left_right(t_game *game, int left);
 void rotate_player(t_game *game, int left);
+void convert_hero_to_pixels(t_map *map);
 
 
 #endif
