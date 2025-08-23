@@ -11,11 +11,11 @@ void	close_game(t_game *game)
 			mlx_delete_texture(game->tx.tex[i]);
 		i++;
 	}
-    if (game->minimap.img)
+    if (game->minimap)
     {
         printf("Cleaning up minimap image\n");
         // Don't delete the image - MLX will handle it
-        game->minimap.img = NULL;
+        game->minimap = NULL;
     }
 }
 
@@ -50,8 +50,7 @@ void game_update(void *param)
     draw_background(game);
     render_view(game);
 	printf("Updating minimap...\n");  // Debug line
-	 if (game->minimap.img)
-        minimap_draw(game, &game->minimap);
+    // minimap_draw(game);
 }
 
 // void game_loop(t_game *game)
@@ -101,7 +100,7 @@ void game_update(void *param)
 // }
 void game_loop(t_game *game)
 {
-    game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", true);
+    game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", false);
     if (!game->mlx)
         return (err_msg("Failed to initialize MLX"));
 
@@ -125,21 +124,25 @@ void game_loop(t_game *game)
     game->img->enabled = true;
     printf("Main image enabled\n");
     
-    if (minimap_init(game, &game->minimap) < 0)
+    if (minimap_init(game) < 0)
     {
         mlx_terminate(game->mlx);
         return (err_msg("minimap init failed"));
     }
-    
     mlx_image_to_window(game->mlx, game->wand, 400, 650);
+    mlx_image_to_window(game->mlx, game->minimap, 100, 700);
+    
     
     // ✅ ENABLE WAND IMAGE
     game->wand->enabled = true;
     printf("Wand image enabled\n");
-
+    
     // Register hooks
     mlx_key_hook(game->mlx, &key_press, game);
+    mlx_loop_hook(game->mlx, &minimap_draw, game);
     mlx_loop_hook(game->mlx, &game_update, game);
+ 
+    
     mlx_close_hook(game->mlx, &cleanup_and_exit, game);
 
     mlx_loop(game->mlx);

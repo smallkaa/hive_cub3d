@@ -16,18 +16,31 @@
 #define NORTH_POV         0     // North orientation
 #define TILE_SIZE         1     // Your grid tile
 
-// struct s_game;
 
-// typedef struct s_minimap
-// {
-// 	mlx_image_t *img;
-// 	int			w;   // pixel width
-// 	int			h;   // pixel height
-// 	int			ox;  // on-screen x
-// 	int			oy;  // on-screen y
-// } t_minimap;
 
-int  minimap_init(t_game *g, t_minimap *mm);
-void minimap_draw(t_game *g, t_minimap *mm);
+typedef struct s_mini
+{
+    float   dx;         // Delta X position
+    float   dy;         // Delta Y position  
+    float   rdx;        // Rotated delta X
+    float   rdy;        // Rotated delta Y
+    float   map_x;      // Map X coordinate
+    float   map_y;      // Map Y coordinate
+    int     tile_x;     // Tile X index
+    int     tile_y;     // Tile Y index
+}               t_mini;
+
+typedef struct s_minimap
+{
+   //	mlx_image_t *img;
+    int         radius;
+    int         scale;
+    int         center_x;   // Center position on screen
+    int         center_y;
+}               t_minimap;
+
+int  minimap_init(t_game *g);
+
+void minimap_draw(void *param);
 
 #endif
