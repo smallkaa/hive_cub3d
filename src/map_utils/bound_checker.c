@@ -1,16 +1,49 @@
 #include "cub3D.h"
 
-static char	getmapitem(t_map *map, int x, int y)
-{
-	int	line_len;
+// static char	getmapitem(t_map *map, int x, int y)
+// {
+// 	int	line_len;
 
-	if (y < 0 || y >= map->size_y || !map->area[y])
+// 	if (y < 0 || y >= map->size_y || !map->area[y])
+// 		return ('\0');
+// 	line_len = ft_strlen(map->area[y]);
+// 	if (x < 0 || x >= line_len)
+// 		return (' ');
+// 	return (map->area[y][x]);
+// }
+/**
+ * @brief Retrieves a character from the map grid at logical (x, y) coordinates.
+ *
+ * This function accesses the actual map data inside the full `map->area`,
+ * compensating for the fact that the map might start further down due to
+ * configuration lines (textures, colors, etc.) at the top of the file.
+ *
+ * To translate logical map coordinates (0-based from top of the map)
+ * into their real position in `map->area`, we compute:
+ *     real_y = y + (map->size_y - map->map_y);
+ * 
+ * Alternatively, if a `map_start` field is available in the map struct, that should be used directly
+ * for better readability:
+ *     real_y = y + map->map_start;
+ *
+ * @param map Pointer to the map structure containing the full area and dimensions.
+ * @param x The X-coordinate (column) within the map.
+ * @param y The Y-coordinate (row) within the map (relative to top of the actual map).
+ * @return The character at the specified position, or a space (' ') if out of bounds.
+ */
+
+static char getmapitem(t_map *map, int x, int y)
+{
+	int real_y = y + (map->size_y - map->map_y); // Adjust Y to match actual map position
+
+	if (real_y < 0 || real_y >= map->size_y || !map->area[real_y])
 		return ('\0');
-	line_len = ft_strlen(map->area[y]);
-	if (x < 0 || x >= line_len)
+	int len = ft_strlen(map->area[real_y]);
+	if (x < 0 || x >= len)
 		return (' ');
-	return (map->area[y][x]);
+	return (map->area[real_y][x]);
 }
+
 
 /*
 ** @brief      Recursive flood fill algorithm to check for map openings.

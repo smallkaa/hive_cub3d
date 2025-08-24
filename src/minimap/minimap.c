@@ -228,32 +228,36 @@
     
 //     return (0);
 // }
-void clear_minimap(mlx_image_t *img, uint32_t color)
+
+
+static void	clear_minimap(mlx_image_t *img, uint32_t color)
 {
 	for (uint32_t y = 0; y < img->height; y++)
 		for (uint32_t x = 0; x < img->width; x++)
 			mlx_put_pixel(img, x, y, color);
 }
 
-void draw_minimap(t_game *game)
+void	draw_minimap(t_game *game)
 {
 	if (!game || !game->map || !game->map->area || !game->minimap)
 		return;
 
 	mlx_image_t *img = game->minimap;
-	clear_minimap(img, 0x00FFCCFF); // заливаем чёрным фоном
+	clear_minimap(img, BACKGROUND);
 
-	for (int y = 0; y < game->map->size_y; y++)
+	int map_start = game->map->size_y - game->map->map_y;
+
+	for (int y = 0; y < game->map->map_y; y++)
 	{
-		for (int x = 0; x < game->map->size_x; x++)
+		for (int x = 0; x < game->map->map_x; x++)
 		{
-			char c = game->map->area[y][x];
+			char c = game->map->area[y + map_start][x];
 			uint32_t color;
 
 			if (c == '1')
-				color = 0x006666FF; // стены
-			else if (c == '0' || c == ' ')
-				color = 0x222222FF; // пол
+				color = WALL_COLOR;
+			else if (c == '0')
+				color = FLOOR_COLOR;
 			else
 				continue;
 
@@ -263,7 +267,6 @@ void draw_minimap(t_game *game)
 				{
 					int px = MINIMAP_MARGIN + x * MINIMAP_TILE + dx;
 					int py = MINIMAP_MARGIN + y * MINIMAP_TILE + dy;
-
 					if (px >= 0 && px < (int)img->width && py >= 0 && py < (int)img->height)
 						mlx_put_pixel(img, px, py, color);
 				}
@@ -271,19 +274,20 @@ void draw_minimap(t_game *game)
 		}
 	}
 
-	// рисуем игрока
+	// Draw player
 	int hero_px = MINIMAP_MARGIN + (int)(game->map->hero.x / TILE_SIZE * MINIMAP_TILE);
 	int hero_py = MINIMAP_MARGIN + (int)(game->map->hero.y / TILE_SIZE * MINIMAP_TILE);
-
-	for (int dy = -2; dy <= 2; dy++)
+    printf("hero: (%.2f, %.2f), pixel: (%d, %d)\n",
+       game->map->hero.x, game->map->hero.y, hero_px, hero_py);
+    
+	for (int dy = -4; dy <= 4; dy++)
 	{
-		for (int dx = -2; dx <= 2; dx++)
+		for (int dx = -4; dx <= 4; dx++)
 		{
 			int px = hero_px + dx;
 			int py = hero_py + dy;
-
 			if (px >= 0 && px < (int)img->width && py >= 0 && py < (int)img->height)
-				mlx_put_pixel(img, px, py, 0xFF0000FF); // красная точка
+				mlx_put_pixel(img, px, py, HERO_COLOR);
 		}
 	}
 }

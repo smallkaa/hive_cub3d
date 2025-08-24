@@ -1,5 +1,7 @@
 #include "cub3D.h"
 
+#define TILE_SIZE 64
+
 bool	is_map_line(const char *line)
 {
 	int	i;
@@ -61,8 +63,11 @@ int process_hero_coordinates(t_map *map, int x, int y)
 	if (map->area[y][x] == 'N' || map->area[y][x] == 'S'
 		|| map->area[y][x] == 'E' || map->area[y][x] == 'W')
 	{
+		// map->hero.x = x * TILE_SIZE + TILE_SIZE / 2;
+		// map->hero.y = y * TILE_SIZE + TILE_SIZE / 2;
 		map->hero.x = x;
-		map->hero.y = y;
+		map->hero.y = y - (map->size_y - map->map_y);
+		
 		if(map->area[y][x] == 'N')
 			map->hero.angle = 0;
 		else if (map->area[y][x] == 'S')
@@ -71,11 +76,11 @@ int process_hero_coordinates(t_map *map, int x, int y)
 			map->hero.angle = 90;
 		else if (map->area[y][x] == 'W')
 			map->hero.angle = 270;
+		//map->area[y][x] = '0'; 
 		return (1);
 	}
 	return (0);
 }
-
 int player_check(t_map *map, int map_start)
 {
 	int	x;
@@ -99,3 +104,4 @@ int player_check(t_map *map, int map_start)
 		return (err_msg("Error: There must be exactly one player (N/S/E/W)"), -1);
 	return (1);
 }
+

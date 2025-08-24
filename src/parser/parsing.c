@@ -92,7 +92,6 @@ int find_map_size(t_map *map, int map_start)
 			max_x = len;
 		y++;
 	}
-
 	map->map_y = y - map_start; // высота только карты
 	map->map_x = max_x;         // максимальная ширина строки карты
 	return (1);

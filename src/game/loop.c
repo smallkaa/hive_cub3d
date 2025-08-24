@@ -131,7 +131,10 @@ void game_loop(t_game *game)
     //     return (err_msg("minimap init failed"));
     // }
     mlx_image_to_window(game->mlx, game->wand, 400, 650);
-    game->minimap = mlx_new_image(game->mlx, MINIMAP_MARGIN * 2 + game->map->size_x * MINIMAP_TILE, MINIMAP_MARGIN * 2 + game->map->size_y * MINIMAP_TILE);
+    //minimap
+    int width  = MINIMAP_MARGIN * 2 + game->map->map_x * MINIMAP_TILE;
+    int height = MINIMAP_MARGIN * 2 + game->map->map_y * MINIMAP_TILE;
+    game->minimap = mlx_new_image(game->mlx, width, height);
 
     mlx_image_to_window(game->mlx, game->minimap, 0, 0);
     //mlx_image_to_window(game->mlx, game->minimap, 100, 700);

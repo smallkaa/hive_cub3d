@@ -23,30 +23,9 @@ typedef struct s_map
 	int			size_y;
 	int			map_x;
 	int			map_y;
+	//int			map_start;
 	t_hero		hero;
-	// t_point		exit_pos;
 }				t_map;
-
-// typedef struct s_mini
-// {
-//     float   dx;         // Delta X position
-//     float   dy;         // Delta Y position  
-//     float   rdx;        // Rotated delta X
-//     float   rdy;        // Rotated delta Y
-//     float   map_x;      // Map X coordinate
-//     float   map_y;      // Map Y coordinate
-//     int     tile_x;     // Tile X index
-//     int     tile_y;     // Tile Y index
-// }               t_mini;
-
-// typedef struct s_minimap
-// {
-//    //mlx_image_t *img;
-//     int         radius;
-//     int         scale;
-//     int         center_x;   // Center position on screen
-//     int         center_y;
-// }               t_minimap;
 
 typedef enum e_face 
 { 
