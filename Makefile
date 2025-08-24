@@ -3,7 +3,7 @@
 NAME = cub3D
 # Compiler and flags
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror -I./includes/ -I./MLX42/include -Wunreachable-code -Ofast
+CFLAGS = -g -Wall -Wextra -Werror -I./includes/ -I./MLX42/include -Wunreachable-code -O0
 
 # --- OS Specific Configuration ---
 UNAME_S := $(shell uname -s)
