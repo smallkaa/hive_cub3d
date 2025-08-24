@@ -32,15 +32,15 @@ void	cleanup_and_exit(void *param)
 
 void game_update(void *param)
 {
-    t_game *game;
+	t_game *game;
 	
 	game = (t_game *)param;
 	handle_movement(game);
-    ft_memset(game->img->pixels, 0, game->img->width * game->img->height \
+	ft_memset(game->img->pixels, 0, game->img->width * game->img->height \
 		* sizeof(uint32_t));
-    
-    draw_background(game);
-    render_view(game);
+	
+	draw_background(game);
+	render_view(game);
 }
 
 void game_loop(t_game *game)

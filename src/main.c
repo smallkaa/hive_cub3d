@@ -1,5 +1,12 @@
 #include "cub3D.h"
 
+void print_hero_debug(t_map *map)
+{
+	printf("Hero at: x = %.2f, y = %.2f (tile: %d, %d)\n",
+		map->hero.x, map->hero.y,
+		(int)(map->hero.x / TILE_SIZE),
+		(int)(map->hero.y / TILE_SIZE));
+}
 int	main(int ac, char **av)
 {
 	t_map *map;
@@ -24,6 +31,8 @@ int	main(int ac, char **av)
 	printf("Player position x- %f y - %f\n, angle - %f\n", map->hero.x, map->hero.y, map->hero.angle);
 	for(int i = 0; map->area[i]; i++)
 		printf("%s\n", map->area[i]);
+	convert_hero_to_pixels(map);
+	print_hero_debug(map);
 	game.map = map;
 	game_loop(&game);
 	free_map(map);

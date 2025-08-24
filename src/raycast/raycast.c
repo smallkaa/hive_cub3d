@@ -175,8 +175,11 @@ void	render_view(t_game *g)
 	t_ray	r;
 	
 	ft_memset(&r, 0, sizeof(t_ray));
-	r.posx = g->map->hero.x + 0.5;
-	r.posy = g->map->hero.y + 0.5;
+	// r.posx = g->map->hero.x + 0.5;
+	// r.posy = g->map->hero.y + 0.5;
+	// transfer to pixels
+	r.posx = g->map->hero.x / TILE_SIZE;
+	r.posy = g->map->hero.y / TILE_SIZE;
 	init_camera(g, &r);
 	x = 0;
 	while (x < WINDOW_WIDTH)
