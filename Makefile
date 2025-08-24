@@ -37,6 +37,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 SRC = $(SRCS_PATH)/main.c \
 		$(SRCS_PATH)/raycast/raycast.c \
 		$(SRCS_PATH)/raycast/drawback.c \
+		$(SRCS_PATH)/raycast/drawtexture.c \
 		$(SRCS_PATH)/init/keys_init.c \
 		$(SRCS_PATH)/init/mlx_init.c \
 		$(SRCS_PATH)/init/textures.c \

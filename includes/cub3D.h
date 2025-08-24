@@ -164,5 +164,6 @@ void				move_left_right(t_game *game, int left);
 void				rotate_player(t_game *game, int left);
 void				convert_hero_to_pixels(t_map *map);
 int					check_collision(t_game *game, double new_x, double new_y);
+void				draw_stripe(t_game *g, int x, t_ray *r);
 
 #endif
