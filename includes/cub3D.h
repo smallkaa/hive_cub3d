@@ -165,5 +165,6 @@ void				rotate_player(t_game *game, int left);
 void				convert_hero_to_pixels(t_map *map);
 int					check_collision(t_game *game, double new_x, double new_y);
 void				draw_stripe(t_game *g, int x, t_ray *r);
+int					map_is_wall(t_map *m, int x, int y);
 
 #endif

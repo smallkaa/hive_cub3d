@@ -4,22 +4,15 @@
 #define BIG_NUM 1e30
 #define FOV_DEG 60.0
 
-/* Return 1 if outside or wall/void, else 0 */
-static int	map_is_wall(t_map *m, int x, int y)
-{
-	size_t	len;
-
-	if (y < 0 || y >= m->size_y || !m->area[y])
-		return (1);
-	len = ft_strlen(m->area[y]);
-	if (x < 0 || (size_t)x >= len)
-		return (1);
-	if (m->area[y][x] == '1' || m->area[y][x] == ' ')
-		return (1);
-	return (0);
-}
-
-/* Build camera basis from hero angle (0=N, 90=E, ...). */
+/*
+** @brief      Initializes the camera's orientation and field of view.
+** @details    1. Converts the player's viewing angle from degrees to radians.
+** 2. Calculates the direction vectors (dirx, diry) based on the
+** angle. This vector points from the player's position forward.
+** 3. Calculates the camera plane vectors (plx, ply), which are
+** perpendicular to the direction vector. The length of the
+** plane vector determines the field of view (FOV).
+*/
 static void	init_camera(t_game *g, t_ray *r)
 {
 	double	theta;
@@ -33,22 +26,16 @@ static void	init_camera(t_game *g, t_ray *r)
 	r->ply = -r->dirx * scale;
 }
 
-/* Initialize ray for screen column x. */
-static void	init_ray_for_x(t_ray *r, int x)
+/*
+** @brief      Sets up the initial step and side distances for the DDA algorithm.
+** @details    1. Determines the step direction (stepx, stepy) as either +1 or
+** -1 based on the ray's direction (rx, ry).
+** 2. Calculates the initial distance (sx, sy) from the player's
+** position to the first vertical (x-side) and horizontal
+** (y-side) grid lines. This is the starting point for the DDA.
+*/
+static void	init_dda_step(t_ray *r)
 {
-	double	cx;
-
-	cx = (2.0 * (double)x / (double)WINDOW_WIDTH) - 1.0;
-	r->rx = r->dirx + r->plx * cx;
-	r->ry = r->diry + r->ply * cx;
-	r->mapx = (int)r->posx;
-	r->mapy = (int)r->posy;
-	r->dx = BIG_NUM;
-	if (r->rx != 0.0)
-		r->dx = fabs(1.0 / r->rx);
-	r->dy = BIG_NUM;
-	if (r->ry != 0.0)
-		r->dy = fabs(1.0 / r->ry);
 	if (r->rx < 0)
 	{
 		r->stepx = -1;
@@ -71,7 +58,46 @@ static void	init_ray_for_x(t_ray *r, int x)
 	}
 }
 
-/* Classic DDA to find the first wall hit. */
+/*
+** @brief      Initializes a ray's properties for a specific screen column (x).
+** @details    1. Calculates the camera's x-coordinate on the camera plane,
+** ranging from -1 for the left edge to +1 for the right edge.
+** 2. Determines the ray's direction vector (rx, ry) for the given
+** screen column.
+** 3. Sets the ray's starting map coordinates (mapx, mapy).
+** 4. Calculates the distance the ray has to travel to cross one
+** full unit in the x or y direction (dx, dy).
+** 5. Calls `init_dda_step` to set up initial DDA parameters.
+*/
+static void	init_ray_for_x(t_ray *r, int x)
+{
+	double	cx;
+
+	cx = (2.0 * (double)x / (double)WINDOW_WIDTH) - 1.0;
+	r->rx = r->dirx + r->plx * cx;
+	r->ry = r->diry + r->ply * cx;
+	r->mapx = (int)r->posx;
+	r->mapy = (int)r->posy;
+	r->dx = BIG_NUM;
+	if (r->rx != 0.0)
+		r->dx = fabs(1.0 / r->rx);
+	r->dy = BIG_NUM;
+	if (r->ry != 0.0)
+		r->dy = fabs(1.0 / r->ry);
+	init_dda_step(r);
+}
+
+/*
+** @brief      Executes the Digital Differential Analysis (DDA) algorithm.
+** @details    1. Steps through the grid, moving one square at a time, until it
+** hits a wall.
+** 2. In each step, it checks whether the next vertical grid line
+** (x-side) or the next horizontal grid line (y-side) is closer.
+** 3. Advances the ray to the closer grid line and updates the map
+** coordinates (mapx or mapy).
+** 4. After a wall is hit, calculates the perpendicular distance
+** (perp) from the player to the wall to avoid a fisheye effect.
+*/
 static void	perform_dda(t_game *g, t_ray *r)
 {
 	while (!map_is_wall(g->map, r->mapx, r->mapy))
@@ -97,8 +123,6 @@ static void	perform_dda(t_game *g, t_ray *r)
 		r->perp = 1e-6;
 }
 
-
-
 /*
 ** The main rendering function that casts a ray for each screen column.
 */
@@ -106,11 +130,8 @@ void	render_view(t_game *g)
 {
 	int		x;
 	t_ray	r;
-	
+
 	ft_memset(&r, 0, sizeof(t_ray));
-	// r.posx = g->map->hero.x + 0.5;
-	// r.posy = g->map->hero.y + 0.5;
-	// transfer to pixels
 	r.posx = g->map->hero.x / TILE_SIZE;
 	r.posy = g->map->hero.y / TILE_SIZE;
 	init_camera(g, &r);

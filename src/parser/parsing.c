@@ -9,8 +9,6 @@ int	name_validation(char *filename)
 	if (len < 5)
 		return (-1);
 	extension = ft_strrchr(filename, '.');
-	if (ft_strlen(extension)!=4)
-		return (-1);
 	if (!extension || ft_strncmp(extension, ".cub", len) != 0)
 		return (-1);
 	return (1);

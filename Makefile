@@ -46,7 +46,6 @@ SRC = $(SRCS_PATH)/main.c \
 		$(SRCS_PATH)/parser/map_check.c \
 		$(SRCS_PATH)/parser/config.c \
 		$(SRCS_PATH)/parser/read.c \
-		$(SRCS_PATH)/map_utils/access_checker.c \
 		$(SRCS_PATH)/map_utils/bound_checker.c \
 		$(SRCS_PATH)/map_utils/print_map.c \
 		$(SRCS_PATH)/game/loop.c \
