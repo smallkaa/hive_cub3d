@@ -1,7 +1,7 @@
-C 51,198,227
+C 41,48,68
 
 
-F 184,113,39
+F 41,44,54
 NO ./assets/lanterns.png
 SO ./assets/wall.png
 WE ./assets/library.png

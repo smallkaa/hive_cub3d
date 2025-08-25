@@ -3,8 +3,8 @@ SO ./assets/wall.png
 WE ./assets/library.png
 EA ./assets/pictures.png
 
-F 220,100,0
-C 225,30,0
+F 41,44,54
+C 41,48,68
 
 
 11111111

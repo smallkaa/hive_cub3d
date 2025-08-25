@@ -13,13 +13,11 @@ void	err_msg(char *msg)
 	write(2, msg, len);
 	write(2, "\n", 1);
 }
-// void	error_msg(char *msg)
-// {
-// 	ft_putendl_fd(msg, 2);
-// }
+
 bool is_valid_symbol(char c)
 {
-	return (c == '0' || c == '1' || c == ' ' || c == 'N' || c == 'S' || c == 'W' || c == 'E');
+	return (c == '0' || c == '1' || c == ' ' || c == 'N'
+			|| c == 'S' || c == 'W' || c == 'E');
 }
 
 int	skip_spaces(const char *str, int i)
