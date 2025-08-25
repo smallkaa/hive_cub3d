@@ -51,7 +51,7 @@ int	symbols_check(t_map *map, int map_start)
 		while (map->area[y][x])
 		{
 			if (!is_valid_symbol(map->area[y][x]))
-				return (err_msg("Error: Wrong symbol found"), -1);
+				return (err_msg("wrong symbol found"), -1);
 			x++;
 		}
 		y++;
@@ -102,6 +102,6 @@ int player_check(t_map *map, int map_start)
 		y++; // increment row
 	}
 	if (player_count != 1)
-		return (err_msg("Error: There must be exactly one player (N/S/E/W)"), -1);
+		return (err_msg("there must be exactly one player (N/S/E/W)"), -1);
 	return (1);
 }

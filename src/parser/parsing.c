@@ -63,7 +63,7 @@ static int parse_config_section(t_map *map)
 
 	if (!map->no || !map->so || !map->we || !map->ea ||
 		map->floor_c == 0xFFFFFFFF || map->ceil_c == 0xFFFFFFFF)
-		return (err_msg("Error: missing texture or color"), -1);
+		return (err_msg("missing texture or color"), -1);
 
 	return (i); // Return map_start index
 }

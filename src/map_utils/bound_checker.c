@@ -133,7 +133,7 @@ bool	is_map_closed(t_map *map)
 	map_copy = create_map_copy(map, dims);
 	if (!map_copy)
 	{
-		err_msg("Failed to create map copy for validation");
+		err_msg("failed to create map copy for validation");
 		return (false);
 	}
 	start_pos.x = (int)map->hero.x;
@@ -141,6 +141,6 @@ bool	is_map_closed(t_map *map)
 	is_closed = flood_fill(map_copy, start_pos, dims);
 	free_area(map_copy, dims.y);
 	if (!is_closed)
-		err_msg("Map is not closed by walls");
+		err_msg("map is not closed by walls");
 	return (is_closed);
 }

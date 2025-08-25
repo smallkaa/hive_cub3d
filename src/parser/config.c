@@ -61,7 +61,7 @@ static int	set_path(char **dst, const char *rhs)
 {
 	if (*dst)
 	{
-		err_msg("Error: duplicate texture");
+		err_msg("duplicate texture");
 		return (0);
 	}
 	*dst = dup_trim_path(rhs);
@@ -82,14 +82,14 @@ int	parse_identifier_line(t_map *map, const char *line)
 	if (line[0] == 'F' && ft_isspace((unsigned char)line[1]))
 	{
 		if (map->floor_c != 0xFFFFFFFF)
-			return (err_msg("Error: duplicate floor color"), 0);
+			return (err_msg("duplicate floor color"), 0);
 		map->floor_c = parse_color(line + 1);
 		return (map->floor_c != 0xFFFFFFFF);
 	}
 	if (line[0] == 'C' && ft_isspace((unsigned char)line[1]))
 	{
 		if (map->ceil_c != 0xFFFFFFFF)
-			return (err_msg("Error: duplicate ceiling color"), 0);
+			return (err_msg("duplicate ceiling color"), 0);
 		map->ceil_c = parse_color(line + 1);
 		return (map->ceil_c != 0xFFFFFFFF);
 	}
