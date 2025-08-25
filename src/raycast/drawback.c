@@ -1,6 +1,27 @@
 #include "cub3D.h"
 
-// This function draws the ceiling and floor
+/*
+** @brief      Fills the screen with the ceiling and floor colors.
+** @details    This function is responsible for drawing the static background
+** of the scene, which consists of a solid color for the
+** ceiling and another for the floor. It is typically called
+** at the beginning of each frame's rendering process.
+**
+** 1. **Draw the Ceiling:**
+** - It iterates through every pixel in the top half of the
+** screen (from y = 0 to the vertical midpoint).
+** - For each pixel, it calls `mlx_put_pixel` to paint it with
+** the predefined ceiling color (`game->map->ceil_c`).
+**
+** 2. **Draw the Floor:**
+** - It then continues iterating from the vertical midpoint to
+** the bottom of the screen.
+** - For each pixel in this bottom half, it paints the
+** predefined floor color (`game->map->floor_c`).
+**
+** This process efficiently establishes the basic sky and ground
+** before the more complex wall textures are drawn over them.
+*/
 void	draw_background(t_game *game)
 {
 	int	x;
