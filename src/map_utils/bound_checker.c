@@ -31,10 +31,10 @@ static bool	flood_fill(char **map_copy, t_point pos, t_point dims)
 	if (map_copy[pos.y][pos.x] == '1' || map_copy[pos.y][pos.x] == 'F')
 		return (true);
 	map_copy[pos.y][pos.x] = 'F';
-	if (!flood_fill(map_copy, (t_point){pos.x + 1, pos.y}, dims) || \
-		!flood_fill(map_copy, (t_point){pos.x - 1, pos.y}, dims) || \
-		!flood_fill(map_copy, (t_point){pos.x, pos.y + 1}, dims) || \
-		!flood_fill(map_copy, (t_point){pos.x, pos.y - 1}, dims))
+	if (!flood_fill(map_copy, (t_point){pos.x + 1, pos.y}, dims)
+		|| !flood_fill(map_copy, (t_point){pos.x - 1, pos.y}, dims)
+		|| !flood_fill(map_copy, (t_point){pos.x, pos.y + 1}, dims)
+		|| !flood_fill(map_copy, (t_point){pos.x, pos.y - 1}, dims))
 	{
 		return (false);
 	}

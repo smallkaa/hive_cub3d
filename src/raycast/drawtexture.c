@@ -44,6 +44,7 @@ static int	calculate_texture_x(t_ray *r, mlx_texture_t *tex)
 		tex_x = tex->width - tex_x - 1;
 	return (tex_x);
 }
+
 /*
 ** @brief      Initializes drawing parameters for a single vertical wall stripe.
 ** @details    This function sets up all the necessary data to render one
@@ -81,6 +82,7 @@ static void	init_stripe(t_game *g, t_ray *r, t_stripe_data *s)
 	s->tex = g->tx.tex[s->face];
 	s->tex_x = calculate_texture_x(r, s->tex);
 }
+
 /*
 ** @brief      Renders a single vertical column of a texture to the screen.
 ** @details    This function iterates through the vertical pixels of a wall
