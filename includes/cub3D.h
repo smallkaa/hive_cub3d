@@ -159,7 +159,7 @@ int					player_check(t_map *map, int map_start);
 void				render_view(t_game *game);
 void				setup_input(t_game *game);
 void				draw_background(t_game *game);
-void				game_loop(t_game *game);
+int					game_loop(t_game *game);
 bool				is_map_closed(t_map *map);
 
 // game

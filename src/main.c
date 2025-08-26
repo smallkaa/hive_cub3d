@@ -34,7 +34,11 @@ int	main(int ac, char **av)
 	convert_hero_to_pixels(map);
 	print_hero_debug(map);
 	game.map = map;
-	game_loop(&game);
+	if (game_loop(&game) < 0)
+	{
+		free_map(map);
+		return (1);
+	}
 	free_map(map);
 	return (0);
 }
