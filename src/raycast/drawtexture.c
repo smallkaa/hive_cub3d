@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   drawtexture.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/09 22:30:53 by mzhivoto          #+#    #+#             */
+/*   Updated: 2024/11/19 18:17:25 by mzhivoto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 /*
@@ -61,7 +73,7 @@ static int	calculate_texture_x(t_ray *r, mlx_texture_t *tex)
 ** screen. The calculation centers the stripe vertically.
 **
 ** 3. **Select the Correct Wall Face:**
-** - `pick_face(r)` is called to determine which side of a map
+** - `determine_wall_face(r)` is called to determine which side of a map
 ** cell was hit (North, South, West, or East).
 **
 ** 4. **Assign the Appropriate Texture:**
@@ -78,7 +90,7 @@ static void	init_stripe(t_game *g, t_ray *r, t_stripe_data *s)
 	s->height = (int)((double)WINDOW_HEIGHT / r->perp);
 	s->y0 = -s->height / 2 + WINDOW_HEIGHT / 2;
 	s->y1 = s->height / 2 + WINDOW_HEIGHT / 2;
-	s->face = pick_face(r);
+	s->face = determine_wall_face(r);
 	s->tex = g->tx.tex[s->face];
 	s->tex_x = calculate_texture_x(r, s->tex);
 }

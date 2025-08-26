@@ -122,6 +122,14 @@ typedef struct s_stripe_data
 	int				tex_x;
 }					t_stripe_data;
 
+typedef struct s_resize_vars
+{
+	const mlx_texture_t	*tex;
+	mlx_image_t			*img;
+	int					new_w;
+	int					new_h;
+}					t_resize_vars;
+
 // Прототипы
 void				init_map(t_map *map);
 void				print_map(t_map *map, int player_x, int player_y);
@@ -156,7 +164,7 @@ bool				is_map_closed(t_map *map);
 
 // game
 int					load_all_textures(t_game *g);
-t_face				pick_face(t_ray *r);
+t_face				determine_wall_face(t_ray *r);
 uint32_t			get_texture_pixel(mlx_texture_t *tex, int x, int y);
 void				handle_movement(t_game *game);
 void				move_forward_backward(t_game *game, int forward);
