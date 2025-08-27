@@ -84,7 +84,7 @@ int	player_check(t_map *map, int map_start)
 	player_count = 0;
 	y = map_start;
 	if (!map || !map->area || !map->area[y])
-		return (err_msg("Error: map->area is NULL"), -1);
+		return (err_msg("there is no any map"), -1);
 	while (map->area[y])
 	{
 		x = 0;

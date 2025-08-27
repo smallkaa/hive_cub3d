@@ -47,13 +47,13 @@ uint32_t	parse_color(const char *str)
 	i = 0;
 	r = parse_number(str, &i);
 	if (r < 0 || r > 255 || str[i++] != ',')
-		return (0xFFFFFFFF);
+		return (err_msg("bad color"), 0xFFFFFFFF);
 	g = parse_number(str, &i);
 	if (g < 0 || g > 255 || str[i++] != ',')
-		return (0xFFFFFFFF);
+		return (err_msg("bad color"), 0xFFFFFFFF);
 	b = parse_number(str, &i);
 	if (b < 0 || b > 255)
-		return (0xFFFFFFFF);
+		return (err_msg("bad color"), 0xFFFFFFFF);
 	i = skip_spaces(str, i);
 	if (str[i] != '\0' && str[i] != '\n')
 		return (0xFFFFFFFF);

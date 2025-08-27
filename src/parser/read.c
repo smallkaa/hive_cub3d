@@ -9,7 +9,7 @@ int	count_lines(char *filename)
 	count = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (err_msg("file openning error 1"), -1);
+		return (-1);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -30,7 +30,7 @@ int	read_map(t_map *map, const char *filename, int max_lines, int i)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (err_msg("file openning error 2"), -1);
+		return (-1);
 	while (i < max_lines)
 	{
 		line = get_next_line(fd);
