@@ -9,7 +9,7 @@ void	err_msg(char *msg)
 		return ;
 	while (msg[len] != '\0')
 		len++;
-	write(2, "Error : ", 8);
+	write(2, "Error\n", 6);
 	write(2, msg, len);
 	write(2, "\n", 1);
 }

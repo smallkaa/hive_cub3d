@@ -7,7 +7,6 @@
 # include <math.h>
 # include <stdbool.h>
 # include <stdint.h>
-# include <stdio.h>
 # include <stdlib.h>
 
 # define TILE_SIZE 64
@@ -20,7 +19,6 @@
 # define MOVE_SPEED 5
 # define ROTATION_SPEED 3.0
 # define COLLISION_BUFFER 5
-# define TILE_SIZE 64
 
 /* Tiny epsilon for divisions */
 #define BIG_NUM 1e30

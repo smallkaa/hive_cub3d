@@ -6,7 +6,7 @@
 /*   By: Pavel Vershinin <pvershin@student.hive.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:59 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/27 20:28:00 by Pavel Versh      ###   ########.fr       */
+/*   Updated: 2025/08/27 21:27:44 by Pavel Versh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	game_loop(t_game *game)
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", false);
 	if (!game->mlx)
 		return (err_msg("Failed to initialize MLX"), -1);
-	setup_input(game);
 	if (load_all_textures(game) < 0)
 		return (mlx_terminate(game->mlx), -1);
 	game->img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);

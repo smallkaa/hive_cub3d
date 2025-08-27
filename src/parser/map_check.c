@@ -1,7 +1,5 @@
 #include "cub3D.h"
 
-#define TILE_SIZE 64
-
 bool	is_map_line(const char *line)
 {
 	int		i;
@@ -31,7 +29,6 @@ int	find_map_start(t_map *map)
 			return (i);
 		i++;
 	}
-	printf("map start check %d\n", i);
 	return (-1);
 }
 
@@ -84,7 +81,7 @@ int	player_check(t_map *map, int map_start)
 	player_count = 0;
 	y = map_start;
 	if (!map || !map->area || !map->area[y])
-		return (err_msg("Error: map->area is NULL"), -1);
+		return (err_msg("map->area is NULL"), -1);
 	while (map->area[y])
 	{
 		x = 0;
