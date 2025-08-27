@@ -22,6 +22,10 @@
 # define COLLISION_BUFFER 5
 # define TILE_SIZE 64
 
+/* Tiny epsilon for divisions */
+#define BIG_NUM 1e30
+#define FOV_DEG 60.0
+
 typedef struct s_hero
 {
 	double			x;
