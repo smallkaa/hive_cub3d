@@ -1,11 +1,12 @@
-NO 					./assets/wood_e.xpm
+NO 						./assets/lanterns.png
 
 
-SO ./assets/wood_n.xpm
-					WE ./assets/wood_s.xpm
+SO ./assets/wall.png
+						WE ./assets/library.png
 
-					
-EA ./assets/wood_w.xpm
+EA ./assets/pictures.png
+
+
 
 F 					184,113,39
 C 51,198,227

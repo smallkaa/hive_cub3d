@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_check.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/28 00:30:03 by mzhivoto          #+#    #+#             */
+/*   Updated: 2025/08/28 00:30:07 by mzhivoto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 bool	is_map_line(const char *line)
@@ -81,7 +93,7 @@ int	player_check(t_map *map, int map_start)
 	player_count = 0;
 	y = map_start;
 	if (!map || !map->area || !map->area[y])
-		return (err_msg("map->area is NULL"), -1);
+		return (err_msg("there is no any map"), -1);
 	while (map->area[y])
 	{
 		x = 0;
