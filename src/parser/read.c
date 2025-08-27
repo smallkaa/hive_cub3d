@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/28 00:27:54 by mzhivoto          #+#    #+#             */
+/*   Updated: 2025/08/28 00:27:57 by mzhivoto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 int	count_lines(char *filename)
@@ -22,10 +34,12 @@ int	count_lines(char *filename)
 	return (count);
 }
 
-int	read_map(t_map *map, const char *filename, int max_lines, int i)
+int	read_map(t_map *map, char *filename, int max_lines, int i)
 {
 	int		fd;
+
 	char	*line;
+
 	char	*nl;
 
 	fd = open(filename, O_RDONLY);

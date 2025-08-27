@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Pavel Vershinin <pvershin@student.hive.    +#+  +:+       +#+        */
+/*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 20:28:04 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/27 20:28:06 by Pavel Versh      ###   ########.fr       */
+/*   Created: 2025/08/28 00:29:37 by mzhivoto          #+#    #+#             */
+/*   Updated: 2025/08/28 00:29:46 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

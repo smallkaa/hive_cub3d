@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:14:10 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 00:14:28 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 00:47:15 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_map
 	uint32_t		floor_c;
 	uint32_t		ceil_c;
 	char			**area;
-	//int				size_x;
 	int				size_y;
 	t_hero			hero;
 }					t_map;
@@ -134,15 +133,10 @@ typedef struct s_resize_vars
 	int					new_h;
 }					t_resize_vars;
 
-// utils
 void				err_msg(char *msg);
 void				free_area(char **area, int n);
 void				free_map(t_map *map);
-
-// parsing
-
-int					read_map(t_map *map, const char *filename, int max_lines,
-						int i);
+int					read_map(t_map *map, char *filename, int max_lines, int i);
 int					count_lines(char *filename);
 t_map				*parsing_args(char *filename);
 int					symbols_check(t_map *map, int map_start);
@@ -153,12 +147,9 @@ bool				is_valid_symbol(char c);
 int					skip_spaces(const char *str, int i);
 int					player_check(t_map *map, int map_start);
 void				render_view(t_game *game);
-void				setup_input(t_game *game);
 void				draw_background(t_game *game);
 int					game_loop(t_game *game);
 bool				is_map_closed(t_map *map);
-
-// game
 int					load_all_textures(t_game *g);
 t_face				determine_wall_face(t_ray *r);
 uint32_t			get_texture_pixel(mlx_texture_t *tex, int x, int y);

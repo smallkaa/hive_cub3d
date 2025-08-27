@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Pavel Vershinin <pvershin@student.hive.    +#+  +:+       +#+        */
+/*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:59 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/27 21:27:44 by Pavel Versh      ###   ########.fr       */
+/*   Updated: 2025/08/28 00:18:33 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	game_loop(t_game *game)
 	mlx_close_hook(game->mlx, &cleanup_and_exit, game);
 	mlx_loop(game->mlx);
 	close_game(game);
+	
 	mlx_terminate(game->mlx);
 	return (0);
 }
