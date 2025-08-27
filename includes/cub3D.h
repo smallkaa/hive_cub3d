@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:14:10 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 00:47:15 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 01:56:29 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void				free_area(char **area, int n);
 void				free_map(t_map *map);
 int					read_map(t_map *map, char *filename, int max_lines, int i);
 int					count_lines(char *filename);
+int					parse_number(const char *str, int *i);
 t_map				*parsing_args(char *filename);
 int					symbols_check(t_map *map, int map_start);
 int					find_map_start(t_map *map);

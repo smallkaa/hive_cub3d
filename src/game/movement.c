@@ -6,13 +6,17 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:29:37 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 00:29:46 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 02:53:49 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-/* Apply movement with collision */
+/*
+** @brief  Attempt to move player with collision check.
+** @details Applies dx/dy offsets, updates position only if
+**          check_collision() allows movement.
+*/
 void	try_move(t_game *game, double dx, double dy)
 {
 	double	new_x;
@@ -26,7 +30,11 @@ void	try_move(t_game *game, double dx, double dy)
 		game->map->hero.y = new_y;
 }
 
-/* Move player forward/backward */
+/*
+** @brief  Move player forward or backward.
+** @details Uses hero angle and MOVE_SPEED to compute dx/dy.
+** @param   forward 1 = forward, 0 = backward.
+*/
 void	move_forward_backward(t_game *game, int forward)
 {
 	double	angle_rad;
@@ -44,7 +52,11 @@ void	move_forward_backward(t_game *game, int forward)
 	try_move(game, dx, dy);
 }
 
-/* Strafe left/right */
+/*
+** @brief  Strafe player left or right.
+** @details Computes perpendicular movement using hero angle.
+** @param   left 1 = left, 0 = right.
+*/
 void	move_left_right(t_game *game, int left)
 {
 	double	angle_rad;
@@ -62,7 +74,11 @@ void	move_left_right(t_game *game, int left)
 	try_move(game, dx, dy);
 }
 
-/* Rotate player */
+/*
+** @brief  Rotate player left or right.
+** @details Adjusts hero angle by ROTATION_SPEED, keeps value in [0,360).
+** @param   left 1 = rotate left, 0 = rotate right.
+*/
 void	rotate_player(t_game *game, int left)
 {
 	if (left)
@@ -75,7 +91,11 @@ void	rotate_player(t_game *game, int left)
 		game->map->hero.angle -= 360;
 }
 
-/* Handle movement input */
+/*
+** @brief  Handle all movement inputs.
+** @details Reads WASD for movement and arrow keys for rotation,
+**          dispatches to movement/rotation helpers.
+*/
 void	handle_movement(t_game *game)
 {
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
