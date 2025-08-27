@@ -77,18 +77,18 @@ $(MLX_PATH):
 # Build libft
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
-
-# Clean rule to remove object files and the library
+	
+# Clean rule to remove object files
 clean:
 	@rm -rf $(OBJS_PATH)
 	@$(MAKE) -C $(LIBFT_PATH) clean
-	@rm -rf $(MLX_PATH)/build
+#	@rm -rf $(MLX_PATH)/build
 	@rm -f sources_dump.txt
 
 fclean: clean
 	/bin/rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT_PATH) fclean
-	@rm -rf $(MLX_PATH)
+#	@rm -rf $(MLX_PATH)
 
 re: fclean all
 
