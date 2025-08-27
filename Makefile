@@ -66,7 +66,7 @@ $(NAME): $(OBJ) $(LIBFT) $(MLX_PATH)
 # Compile each .c file into a .o file
 $(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -MMD -MP -MF $(@:.o=.d) -MT $@ -c $< -o $@
 
 #Clone and build MLX42
 $(MLX_PATH):
@@ -77,7 +77,7 @@ $(MLX_PATH):
 # Build libft
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
-	
+
 # Clean rule to remove object files
 clean:
 	@rm -rf $(OBJS_PATH)
@@ -93,3 +93,8 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+DEPFLAGS = -MMD -MP
+CFLAGS  += $(DEPFLAGS)
+DEPS := $(OBJ:.o=.d)
+
+-include $(DEPS)
