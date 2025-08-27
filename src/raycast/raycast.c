@@ -1,8 +1,16 @@
-#include "cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Pavel Vershinin <pvershin@student.hive.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/27 20:26:50 by Pavel Versh       #+#    #+#             */
+/*   Updated: 2025/08/27 20:29:44 by Pavel Versh      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/* Tiny epsilon for divisions */
-#define BIG_NUM 1e30
-#define FOV_DEG 60.0
+#include "cub3D.h"
 
 /*
 ** @brief      Initializes the camera's orientation and field of view.

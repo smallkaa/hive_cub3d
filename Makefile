@@ -39,8 +39,6 @@ SRC = $(SRCS_PATH)/main.c \
 		$(SRCS_PATH)/raycast/drawback.c \
 		$(SRCS_PATH)/raycast/drawtexture.c \
 		$(SRCS_PATH)/raycast/texture_utils.c \
-		$(SRCS_PATH)/init/keys_init.c \
-		$(SRCS_PATH)/init/mlx_init.c \
 		$(SRCS_PATH)/init/textures.c \
 		$(SRCS_PATH)/parser/utils.c \
 		$(SRCS_PATH)/parser/parsing.c \
@@ -65,7 +63,7 @@ $(NAME): $(OBJ) $(LIBFT) $(MLX_PATH)
 # Compile each .c file into a .o file
 $(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -MMD -MP -MF $(@:.o=.d) -MT $@ -c $< -o $@
 
 #Clone and build MLX42
 $(MLX_PATH):
@@ -76,7 +74,7 @@ $(MLX_PATH):
 # Build libft
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
-	
+
 # Clean rule to remove object files
 clean:
 	@rm -rf $(OBJS_PATH)
@@ -92,3 +90,8 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+DEPFLAGS = -MMD -MP
+CFLAGS  += $(DEPFLAGS)
+DEPS := $(OBJ:.o=.d)
+
+-include $(DEPS)

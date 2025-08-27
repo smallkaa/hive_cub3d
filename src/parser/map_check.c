@@ -1,7 +1,5 @@
 #include "cub3D.h"
 
-#define TILE_SIZE 64
-
 bool	is_map_line(const char *line)
 {
 	int		i;
@@ -31,7 +29,6 @@ int	find_map_start(t_map *map)
 			return (i);
 		i++;
 	}
-	printf("map start check %d\n", i);
 	return (-1);
 }
 

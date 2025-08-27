@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Pavel Vershinin <pvershin@student.hive.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/27 20:27:29 by Pavel Versh       #+#    #+#             */
+/*   Updated: 2025/08/27 21:26:11 by Pavel Versh      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 /**
@@ -26,7 +38,7 @@ static void	process_row(t_resize_vars *v, int y)
 	while (x < v->new_w)
 	{
 		src_x = (int)((long long)x * v->tex->width / v->new_w);
-		sidx = ((size_t)src_y * v->tex->width + src_x) * 4;
+		sidx = ((size_t)src_y * v->tex->width + src_x) * v->tex->bytes_per_pixel;
 		pix = *(const uint32_t *)(v->tex->pixels + sidx);
 		((uint32_t *)v->img->pixels)[y * v->new_w + x] = pix;
 		x++;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/28 00:14:10 by mzhivoto          #+#    #+#             */
+/*   Updated: 2025/08/28 00:14:28 by mzhivoto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -7,7 +19,6 @@
 # include <math.h>
 # include <stdbool.h>
 # include <stdint.h>
-# include <stdio.h>
 # include <stdlib.h>
 
 # define TILE_SIZE 64
@@ -16,11 +27,13 @@
 # define WAND_W 400
 # define WAND_H 400
 # define WAND "./assets/wand.png"
-
 # define MOVE_SPEED 5
 # define ROTATION_SPEED 3.0
 # define COLLISION_BUFFER 5
-# define TILE_SIZE 64
+
+/* Tiny epsilon for divisions */
+#define BIG_NUM 1e30
+#define FOV_DEG 60.0
 
 typedef struct s_hero
 {
