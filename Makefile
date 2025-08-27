@@ -38,17 +38,16 @@ SRC = $(SRCS_PATH)/main.c \
 		$(SRCS_PATH)/raycast/raycast.c \
 		$(SRCS_PATH)/raycast/drawback.c \
 		$(SRCS_PATH)/raycast/drawtexture.c \
-        $(SRCS_PATH)/raycast/texture_utils.c \
+		$(SRCS_PATH)/raycast/texture_utils.c \
 		$(SRCS_PATH)/init/keys_init.c \
 		$(SRCS_PATH)/init/mlx_init.c \
 		$(SRCS_PATH)/init/textures.c \
 		$(SRCS_PATH)/parser/utils.c \
 		$(SRCS_PATH)/parser/parsing.c \
 		$(SRCS_PATH)/parser/map_check.c \
+		$(SRCS_PATH)/parser/bound_checker.c \
 		$(SRCS_PATH)/parser/config.c \
 		$(SRCS_PATH)/parser/read.c \
-		$(SRCS_PATH)/map_utils/bound_checker.c \
-		$(SRCS_PATH)/map_utils/print_map.c \
 		$(SRCS_PATH)/game/loop.c \
 		$(SRCS_PATH)/game/movement.c \
 		$(SRCS_PATH)/game/game_utils.c \

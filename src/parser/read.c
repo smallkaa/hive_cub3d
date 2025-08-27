@@ -22,7 +22,7 @@ int	count_lines(char *filename)
 	return (count);
 }
 
-int read_map(t_map *map, const char *filename, int max_lines, int i)
+int	read_map(t_map *map, const char *filename, int max_lines, int i)
 {
 	int		fd;
 	char	*line;
@@ -35,7 +35,7 @@ int read_map(t_map *map, const char *filename, int max_lines, int i)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			break;
+			break ;
 		nl = ft_strchr(line, '\n');
 		if (nl)
 			*nl = '\0';

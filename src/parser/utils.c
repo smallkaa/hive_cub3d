@@ -14,10 +14,10 @@ void	err_msg(char *msg)
 	write(2, "\n", 1);
 }
 
-bool is_valid_symbol(char c)
+bool	is_valid_symbol(char c)
 {
-	return (c == '0' || c == '1' || c == ' ' || c == 'N'
-			|| c == 'S' || c == 'W' || c == 'E');
+	return (c == '0' || c == '1' || c == ' ' || c == 'N' || c == 'S' || c == 'W'
+		|| c == 'E');
 }
 
 int	skip_spaces(const char *str, int i)
@@ -27,12 +27,12 @@ int	skip_spaces(const char *str, int i)
 	return (i);
 }
 
-void free_area(char **area, int n)
+void	free_area(char **area, int n)
 {
-	int i;
+	int	i;
 
 	if (!area)
-		return;
+		return ;
 	i = 0;
 	while (i < n)
 	{
@@ -42,12 +42,12 @@ void free_area(char **area, int n)
 	free(area);
 }
 
-void free_map(t_map *map)
+void	free_map(t_map *map)
 {
-	int i;
+	int	i;
 
 	if (!map)
-		return;
+		return ;
 	if (map->area)
 	{
 		i = 0;

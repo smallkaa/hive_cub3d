@@ -38,7 +38,7 @@ typedef struct s_map
 	uint32_t		floor_c;
 	uint32_t		ceil_c;
 	char			**area;
-	int				size_x;
+	//int				size_x;
 	int				size_y;
 	t_hero			hero;
 }					t_map;
@@ -53,7 +53,7 @@ typedef enum e_face
 
 typedef struct s_textures
 {
-	mlx_texture_t *tex[4]; // NO, SO, WE, EA (raw PNGs)
+	mlx_texture_t	*tex[4];
 }					t_textures;
 
 typedef struct s_ray
@@ -77,15 +77,6 @@ typedef struct s_ray
 	int				side;
 	double			perp;
 }					t_ray;
-
-// typedef struct mlx_instance
-// {
-//     int32_t x;
-//     int32_t y;
-//     bool enabled;
-//     int32_t z;
-//     // rotation, scale are not present
-// } mlx_instance_t;
 
 typedef struct s_game
 {
@@ -129,14 +120,6 @@ typedef struct s_resize_vars
 	int					new_w;
 	int					new_h;
 }					t_resize_vars;
-
-// Прототипы
-void				init_map(t_map *map);
-void				print_map(t_map *map, int player_x, int player_y);
-// void print_map_with_leak(t_map *map, int px, int py, int lx, int ly);
-// void print_map_with_islands(t_map *original_map, t_map *flooded_map, int px,int py);
-// bool is_map_closed(t_map *map, int start_x, int start_y, int *exit_x, int *exit_y);
-// bool is_map_fully_accessible(t_map *map, t_map *map_copy, int start_x, int start_y);
 
 // utils
 void				err_msg(char *msg);

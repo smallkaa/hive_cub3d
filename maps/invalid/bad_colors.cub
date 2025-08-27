@@ -2,7 +2,8 @@ NO ./assets/lanterns.png
 SO ./assets/wall.png
 WE ./assets/library.png
 EA ./assets/pictures.png
-C 51,198,257
+
+C 51,198,254
 F 184,113,39
 
 11111111111111111
