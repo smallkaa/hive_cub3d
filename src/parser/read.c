@@ -30,7 +30,7 @@ int	read_map(t_map *map, const char *filename, int max_lines, int i)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (err_msg("file openning error 2"), -1);
+		return (err_msg("file opening error 2"), -1);
 	while (i < max_lines)
 	{
 		line = get_next_line(fd);

@@ -6,7 +6,7 @@
 /*   By: Pavel Vershinin <pvershin@student.hive.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:26:16 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/27 20:26:17 by Pavel Versh      ###   ########.fr       */
+/*   Updated: 2025/08/27 21:33:13 by Pavel Versh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	if (ac != 2)
-		return (err_msg("Usage: ./cub3d <file.cub>"), 1);
+		return (err_msg("Usage: ./cub3D <file.cub>"), 1);
 	map = parsing_args(av[1]);
 	if (!map)
 		return (1);
