@@ -8,8 +8,6 @@ void	try_move(t_game *game, double dx, double dy)
 
 	new_x = game->map->hero.x + dx;
 	new_y = game->map->hero.y + dy;
-	// printf("Current position: %.2f, %.2f\n", game->map->hero.x, game->map->hero.y);
-	// printf("Trying move: dx=%.2f dy=%.2f -> new_x=%.2f new_y=%.2f\n",dx, dy,new_x, new_y);
 	if (check_collision(game, new_x, game->map->hero.y))
 		game->map->hero.x = new_x;
 	if (check_collision(game, game->map->hero.x, new_y))
@@ -73,9 +71,9 @@ void	handle_movement(t_game *game)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 		move_forward_backward(game, 0);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-		move_left_right(game, 1); // D = right
+		move_left_right(game, 1);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-		move_left_right(game, 0); // A = left
+		move_left_right(game, 0);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		rotate_player(game, 0);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))

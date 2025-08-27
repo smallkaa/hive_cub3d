@@ -9,7 +9,7 @@ static char	*dup_trim_path(const char *line)
 		line++;
 	n = ft_strlen(line);
 	while (n > 0 && (line[n - 1] == '\n' || line[n - 1] == ' '
-		|| line[n - 1] == '\t' || line[n - 1] == '\r'))
+			|| line[n - 1] == '\t' || line[n - 1] == '\r'))
 		n--;
 	if (n == 0)
 		return (NULL);
@@ -23,8 +23,9 @@ static char	*dup_trim_path(const char *line)
 
 static int	parse_number(const char *str, int *i)
 {
-	int	num = 0;
+	int	num;
 
+	num = 0;
 	*i = skip_spaces(str, *i);
 	if (str[*i] < '0' || str[*i] > '9')
 		return (-1);
@@ -38,8 +39,10 @@ static int	parse_number(const char *str, int *i)
 
 uint32_t	parse_color(const char *str)
 {
-	int		r, g, b;
-	int		i;
+	int	i;
+	int	r;
+	int	g;
+	int	b;
 
 	i = 0;
 	r = parse_number(str, &i);
@@ -52,7 +55,7 @@ uint32_t	parse_color(const char *str)
 	if (b < 0 || b > 255)
 		return (0xFFFFFFFF);
 	i = skip_spaces(str, i);
-	if (str[i] != '\0' && str[i] != '\n') // nothing extra allowed
+	if (str[i] != '\0' && str[i] != '\n')
 		return (0xFFFFFFFF);
 	return ((r << 24) | (g << 16) | (b << 8) | 0xFF);
 }
@@ -67,6 +70,7 @@ static int	set_path(char **dst, const char *rhs)
 	*dst = dup_trim_path(rhs);
 	return (*dst != NULL);
 }
+
 int	parse_identifier_line(t_map *map, const char *line)
 {
 	while (*line == ' ' || *line == '\t')
@@ -95,4 +99,3 @@ int	parse_identifier_line(t_map *map, const char *line)
 	}
 	return (0);
 }
-
