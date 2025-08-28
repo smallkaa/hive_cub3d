@@ -6,7 +6,7 @@
 /*   By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:29 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/28 12:55:40 by pvershin         ###   ########.fr       */
+/*   Updated: 2025/08/28 13:11:27 by pvershin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	process_row(t_resize_vars *v, int y)
 	while (x < v->new_w)
 	{
 		src_x = (int)((long long)x * v->tex->width / v->new_w);
-		sidx = ((size_t)src_y * v->tex->width + src_x) * v->tex->bytes_per_pixel;
+		sidx = ((size_t)src_y * v->tex->width + src_x) * 4;
 		pix = *(const uint32_t *)(v->tex->pixels + sidx);
 		((uint32_t *)v->img->pixels)[y * v->new_w + x] = pix;
 		x++;
