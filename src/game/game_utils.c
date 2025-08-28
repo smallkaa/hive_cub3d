@@ -15,7 +15,8 @@
 /*
 ** @brief      Converts hero position from tile coordinates to pixel coordinates.
 **
-** @details    Initially, the hero's position (x, y) is stored in **tile coordinates**
+** @details    Initially, the hero's position (x,
+	y) is stored in **tile coordinates**
 **             (i.e., indexes on the map grid). But for rendering and collision
 **             detection, we need **pixel precision**.
 **
@@ -32,7 +33,8 @@ void	convert_hero_to_pixels(t_map *map)
 	map->hero.y = map->hero.y * TILE_SIZE + TILE_SIZE / 2;
 }
 /*
-** @brief      Checks for collision at a new (x, y) position using a bounding box.
+** @brief      Checks for collision at a new (x,
+	y) position using a bounding box.
 **
 ** @details    1. Calculates four surrounding tile positions based on a small
 **             collision buffer to represent the player's physical space.
@@ -45,21 +47,29 @@ void	convert_hero_to_pixels(t_map *map)
 */
 int	check_collision(t_game *g, double new_x, double new_y)
 {
-	int tx0 = (int)((new_x - COLLISION_BUFFER) / TILE_SIZE);
-	int ty0 = (int)((new_y - COLLISION_BUFFER) / TILE_SIZE);
-	int tx1 = (int)((new_x + COLLISION_BUFFER) / TILE_SIZE);
-	int ty1 = (int)((new_y + COLLISION_BUFFER) / TILE_SIZE);
+	int	tx0;
+	int	ty0;
+	int	tx1;
+	int	ty1;
 
-	if (map_is_wall(g->map, tx0, ty0)) return (0);
-	if (map_is_wall(g->map, tx1, ty0)) return (0);
-	if (map_is_wall(g->map, tx0, ty1)) return (0);
-	if (map_is_wall(g->map, tx1, ty1)) return (0);
+	tx0 = (int)((new_x - COLLISION_BUFFER) / TILE_SIZE);
+	ty0 = (int)((new_y - COLLISION_BUFFER) / TILE_SIZE);
+	tx1 = (int)((new_x + COLLISION_BUFFER) / TILE_SIZE);
+	ty1 = (int)((new_y + COLLISION_BUFFER) / TILE_SIZE);
+	if (map_is_wall(g->map, tx0, ty0))
+		return (0);
+	if (map_is_wall(g->map, tx1, ty0))
+		return (0);
+	if (map_is_wall(g->map, tx0, ty1))
+		return (0);
+	if (map_is_wall(g->map, tx1, ty1))
+		return (0);
 	return (1);
 }
 
 void	free_resources(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (game->img)

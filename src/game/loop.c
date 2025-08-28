@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:59 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/28 12:47:24 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 12:55:51 by pvershin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	game_update(void *param)
 int	game_loop(t_game *game)
 {
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", false);
-	if (!game->mlx) // no  leaks
+	if (!game->mlx)
 		return (err_msg("Failed to initialize MLX"), -1);
 	if (load_all_textures(game) < 0)
 		return (mlx_terminate(game->mlx), -1);

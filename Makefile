@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+         #
+#    By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/28 00:37:00 by mzhivoto          #+#    #+#              #
-#    Updated: 2025/08/28 11:19:16 by mzhivoto         ###   ########.fr        #
+#    Updated: 2025/08/28 12:56:16 by pvershin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,13 +93,13 @@ $(LIBFT):
 clean:
 	@rm -rf $(OBJS_PATH)
 	@$(MAKE) -C $(LIBFT_PATH) clean
-#	@rm -rf $(MLX_PATH)/build
+	@rm -rf $(MLX_PATH)/build
 	@rm -f sources_dump.txt
 
 fclean: clean
 	/bin/rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT_PATH) fclean
-#	@rm -rf $(MLX_PATH)
+	@rm -rf $(MLX_PATH)
 
 re: fclean all
 
