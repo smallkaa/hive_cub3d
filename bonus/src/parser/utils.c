@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:36:24 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 13:24:41 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 15:08:46 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	err_msg(char *msg)
 
 bool	is_valid_symbol(char c)
 {
-	return (c == '0' || c == '1' || c == ' ' || c == 'N' || c == 'S' || c == 'W'
-		|| c == 'E');
+	return (c == '0' || c == '1' || c == ' ' || c == 'N' || c == 'S'
+		|| c == 'W' || c == 'E');
 }
 
 int	skip_spaces(const char *str, int i)

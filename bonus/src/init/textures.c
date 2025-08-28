@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:29 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/28 13:11:27 by pvershin         ###   ########.fr       */
+/*   Updated: 2025/08/28 14:46:06 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
  * @param v The resize variables struct.
  * @param y The current y-coordinate in the destination image.
  */
-static void	process_row(t_resize_vars *v, int y)
+static void	process_wand_resize(t_resize_vars *v, int y)
 {
 	int			x;
 	int			src_x;
@@ -60,7 +60,7 @@ static void	process_row(t_resize_vars *v, int y)
  * @param new_h The new height.
  * @return A new mlx_image_t with the resized texture, or NULL on failure.
  */
-static mlx_image_t	*resize_tex_to_image(mlx_t *mlx,
+static mlx_image_t	*resize_wand_to_image(mlx_t *mlx,
 	const mlx_texture_t *tex, int new_w, int new_h)
 {
 	t_resize_vars	vars;
@@ -77,7 +77,7 @@ static mlx_image_t	*resize_tex_to_image(mlx_t *mlx,
 	y = 0;
 	while (y < new_h)
 	{
-		process_row(&vars, y);
+		process_wand_resize(&vars, y);
 		y++;
 	}
 	return (vars.img);
@@ -117,7 +117,7 @@ static int	load_texture_from_path(mlx_texture_t **slot, const char *path)
  * @param path The path to the wand texture.
  * @return 0 on success, -1 on failure.
  */
-int	load_wand(t_game *g, char *path)
+static int	load_wand(t_game *g, char *path)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*img;
@@ -133,7 +133,7 @@ int	load_wand(t_game *g, char *path)
 		err_msg("Failed to load texture");
 		return (-1);
 	}
-	img = resize_tex_to_image(g->mlx, texture, WAND_W, WAND_H);
+	img = resize_wand_to_image(g->mlx, texture, WAND_W, WAND_H);
 	mlx_delete_texture(texture);
 	if (!img)
 	{

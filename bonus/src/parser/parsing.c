@@ -6,13 +6,13 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:28:03 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 13:26:26 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 15:07:11 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	name_validation(char *filename)
+static int	name_validation(char *filename)
 {
 	char	*extension;
 	int		len;
