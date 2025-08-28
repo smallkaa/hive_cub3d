@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:36:24 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 01:37:01 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 11:34:46 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	err_msg(char *msg)
 		return ;
 	while (msg[len] != '\0')
 		len++;
-	write(2, "Error: ", 7);
+	write(2, "Error\n ", 6);
 	write(2, msg, len);
 	write(2, "\n", 1);
 }

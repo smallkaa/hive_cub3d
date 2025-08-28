@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Pavel Vershinin <pvershin@student.hive.    +#+  +:+       +#+        */
+/*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:29 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/27 21:26:11 by Pavel Versh      ###   ########.fr       */
+/*   Updated: 2025/08/28 12:45:23 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static mlx_image_t	*resize_tex_to_image(mlx_t *mlx,
  */
 static int	load_texture_from_path(mlx_texture_t **slot, const char *path)
 {
+	(void)path;
 	*slot = mlx_load_png(path);
 	if (!*slot)
 	{
@@ -143,7 +144,17 @@ int	load_wand(t_game *g, char *path)
 	g->wand = img;
 	return (0);
 }
-
+// static void cleanup_textures(mlx_texture_t *tex[4])
+// {
+//     while (int i = 0; i < 4; i++)
+//     {
+//         if (tex[i])
+//         {
+//             mlx_delete_texture(tex[i]);
+//             tex[i] = NULL;
+//         }
+//     }
+// }
 /**
  * @brief Loads all game textures.
  * @details
@@ -176,6 +187,7 @@ int	load_all_textures(t_game *g)
 	}
 	if (load_wand(g, WAND) < 0)
 	{
+		close_game(g);
 		return (-1);
 	}
 	return (0);
