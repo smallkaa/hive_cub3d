@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/08/28 00:37:00 by mzhivoto          #+#    #+#              #
-#    Updated: 2025/08/28 12:56:16 by pvershin         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # Library name
 NAME = cub3D
 # Compiler and flags
@@ -58,12 +46,12 @@ SRC = $(SRCS_PATH)/main.c \
 		$(SRCS_PATH)/parser/map_check.c \
 		$(SRCS_PATH)/parser/bound_checker.c \
 		$(SRCS_PATH)/parser/config.c \
+		$(SRCS_PATH)/parser/config_utils.c \
 		$(SRCS_PATH)/parser/read.c \
 		$(SRCS_PATH)/game/loop.c \
 		$(SRCS_PATH)/game/movement.c \
 		$(SRCS_PATH)/game/game_utils.c \
-
-
+		
 OBJ := $(patsubst $(SRCS_PATH)/%.c, $(OBJS_PATH)/%.o, $(SRC))
 DEPS := $(OBJ:.o=.d)
 

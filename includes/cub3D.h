@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:14:10 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 12:49:07 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 13:18:15 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@
 # define MOVE_SPEED 5
 # define ROTATION_SPEED 3.0
 # define COLLISION_BUFFER 5
-
-/* Tiny epsilon for divisions */
-#define BIG_NUM 1e30
-#define FOV_DEG 60.0
+# define BIG_NUM 1e30
+# define FOV_DEG 60.0
 
 typedef struct s_hero
 {
@@ -164,5 +162,7 @@ void				draw_stripe(t_game *g, int x, t_ray *r);
 int					map_is_wall(t_map *m, int x, int y);
 void				free_resources(t_game *game);
 void				close_game(t_game *game);
+char				*dup_trim_path(const char *line);
+int					set_path(char **dst, const char *rhs);
 
 #endif
