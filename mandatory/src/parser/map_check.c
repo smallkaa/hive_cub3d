@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:30:03 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 00:30:07 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 15:05:45 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	symbols_check(t_map *map, int map_start)
 	return (1);
 }
 
-int	process_hero_coordinates(t_map *map, int x, int y)
+static int	process_hero_coordinates(t_map *map, int x, int y)
 {
 	if (map->area[y][x] == 'N' || map->area[y][x] == 'S'
 		|| map->area[y][x] == 'E' || map->area[y][x] == 'W')
