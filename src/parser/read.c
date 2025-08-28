@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:27:54 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 11:19:51 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 13:15:02 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	count_lines(char *filename)
 	close(fd);
 	return (count);
 }
+
 /*
 ** @brief  Reads lines from .cub file into map->area.
 ** @details Opens file, reads up to max_lines with get_next_line(),

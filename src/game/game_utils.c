@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:54 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/28 12:46:46 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 13:15:11 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ void	convert_hero_to_pixels(t_map *map)
 	map->hero.x = map->hero.x * TILE_SIZE + TILE_SIZE / 2;
 	map->hero.y = map->hero.y * TILE_SIZE + TILE_SIZE / 2;
 }
+
 /*
 ** @brief      Checks for collision at a new (x,
 	y) position using a bounding box.
 **
 ** @details    1. Calculates four surrounding tile positions based on a small
 **             collision buffer to represent the player's physical space.
-**             2. Converts the buffered coordinates to tile indices using TILE_SIZE.
+**             2. Converts the buffered coordinates to tile indices 
+**                using TILE_SIZE.
 **             3. Uses map_is_wall() to determine if any of the four corners
 **             (top-left, top-right, bottom-left, bottom-right) are walls.
 **
