@@ -6,7 +6,7 @@
 #    By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/28 00:37:00 by mzhivoto          #+#    #+#              #
-#    Updated: 2025/08/28 00:37:15 by mzhivoto         ###   ########.fr        #
+#    Updated: 2025/08/28 11:19:16 by mzhivoto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ NAME = cub3D
 # Compiler and flags
 CC = cc
 CFLAGS = -g -Wall -Wextra -Werror -I./includes/ -I./MLX42/include -Wunreachable-code -O0
+DEPFLAGS = -MMD -MP
+CFLAGS  += $(DEPFLAGS)
 
 # --- OS Specific Configuration ---
 UNAME_S := $(shell uname -s)
@@ -63,6 +65,7 @@ SRC = $(SRCS_PATH)/main.c \
 
 
 OBJ := $(patsubst $(SRCS_PATH)/%.c, $(OBJS_PATH)/%.o, $(SRC))
+DEPS := $(OBJ:.o=.d)
 
 # Default rule to create the library
 all: $(MLX_PATH) $(NAME)
@@ -101,8 +104,5 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-DEPFLAGS = -MMD -MP
-CFLAGS  += $(DEPFLAGS)
-DEPS := $(OBJ:.o=.d)
 
 -include $(DEPS)

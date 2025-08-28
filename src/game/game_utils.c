@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:54 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/28 02:56:47 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 12:46:46 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,34 @@ int	check_collision(t_game *g, double new_x, double new_y)
 	if (map_is_wall(g->map, tx0, ty1)) return (0);
 	if (map_is_wall(g->map, tx1, ty1)) return (0);
 	return (1);
+}
+
+void	free_resources(t_game *game)
+{
+	int i;
+
+	i = 0;
+	if (game->img)
+		mlx_delete_image(game->mlx, game->img);
+	if (game->wand)
+		mlx_delete_image(game->mlx, game->wand);
+	while (i < 4)
+	{
+		if (game->tx.tex[i])
+			mlx_delete_texture(game->tx.tex[i]);
+		i++;
+	}
+}
+
+void	close_game(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (game->tx.tex[i])
+			mlx_delete_texture(game->tx.tex[i]);
+		i++;
+	}
 }
