@@ -1,5 +1,7 @@
 # Library name
 NAME = cub3D
+BONUS_NAME  := cub3D_bonus
+
 # Compiler and flags
 CC = cc
 CFLAGS = -g -Wall -Wextra -Werror -I./includes/ -I./MLX42/include -Wunreachable-code -O0
@@ -26,15 +28,19 @@ else ifeq ($(UNAME_S),Darwin)
 endif
 # --- End of OS Specific Configuration ---
 
-SRCS_PATH = ./src
+SRCS_PATH = ./mandatory/src
+SRCS_BONUS_PATH = ./bonus/src
 OBJS_PATH = ./obj
+OBJS_M_PATH = $(OBJS_PATH)/mandatory
+OBJS_B_PATH = $(OBJS_PATH)/bonus
 LIBFT_PATH = ./libft
 MLX_PATH = ./MLX42
 MLX_REPO = https://github.com/codam-coding-college/MLX42.git
 
-# Source files and object files
+# Source files (explicit lists)
 MLXLIB = MLX42/build/libmlx42.a
 LIBFT = $(LIBFT_PATH)/libft.a
+
 SRC = $(SRCS_PATH)/main.c \
 		$(SRCS_PATH)/raycast/raycast.c \
 		$(SRCS_PATH)/raycast/drawback.c \
@@ -50,24 +56,56 @@ SRC = $(SRCS_PATH)/main.c \
 		$(SRCS_PATH)/parser/read.c \
 		$(SRCS_PATH)/game/loop.c \
 		$(SRCS_PATH)/game/movement.c \
-		$(SRCS_PATH)/game/game_utils.c \
-		
-OBJ := $(patsubst $(SRCS_PATH)/%.c, $(OBJS_PATH)/%.o, $(SRC))
-DEPS := $(OBJ:.o=.d)
+		$(SRCS_PATH)/game/game_utils.c
 
-# Default rule to create the library
+SRC_BONUS = $(SRCS_BONUS_PATH)/main.c \
+		$(SRCS_BONUS_PATH)/raycast/raycast.c \
+		$(SRCS_BONUS_PATH)/raycast/drawback.c \
+		$(SRCS_BONUS_PATH)/raycast/drawtexture.c \
+		$(SRCS_BONUS_PATH)/raycast/texture_utils.c \
+		$(SRCS_BONUS_PATH)/init/textures.c \
+		$(SRCS_BONUS_PATH)/parser/utils.c \
+		$(SRCS_BONUS_PATH)/parser/parsing.c \
+		$(SRCS_BONUS_PATH)/parser/map_check.c \
+		$(SRCS_BONUS_PATH)/parser/bound_checker.c \
+		$(SRCS_BONUS_PATH)/parser/config.c \
+		$(SRCS_BONUS_PATH)/parser/config_utils.c \
+		$(SRCS_BONUS_PATH)/parser/read.c \
+		$(SRCS_BONUS_PATH)/game/loop.c \
+		$(SRCS_BONUS_PATH)/game/movement.c \
+		$(SRCS_BONUS_PATH)/game/game_utils.c
+
+# Objects & deps split per variant
+OBJ_M := $(patsubst $(SRCS_PATH)/%.c, $(OBJS_M_PATH)/%.o, $(SRC))
+OBJ_B := $(patsubst $(SRCS_BONUS_PATH)/%.c, $(OBJS_B_PATH)/%.o, $(SRC_BONUS))
+DEPS_M := $(OBJ_M:.o=.d)
+DEPS_B := $(OBJ_B:.o=.d)
+
+# Default: mandatory
 all: $(MLX_PATH) $(NAME)
 
-# Rule to create the library from object files
-$(NAME): $(OBJ) $(LIBFT) $(MLX_PATH)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLXLIB) $(LDFLAGS) -o $(NAME)
+# Mandatory link
+$(NAME): $(OBJ_M) $(LIBFT) $(MLX_PATH)
+	$(CC) $(CFLAGS) $(OBJ_M) $(LIBFT) $(MLXLIB) $(LDFLAGS) -o $(NAME)
 
-# Compile each .c file into a .o file
-$(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -MMD -MP -MF $(@:.o=.d) -MT $@ -c $< -o $@
+# Mandatory compile
+$(OBJS_M_PATH)/%.o: $(SRCS_PATH)/%.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -MF $(@:.o=.d) -MT $@ -c $< -o $@
 
-#Clone and build MLX42
+# Bonus entrypoint (does NOT rebuild mandatory)
+bonus: $(MLX_PATH) $(BONUS_NAME)
+
+# Bonus link
+$(BONUS_NAME): $(OBJ_B) $(LIBFT) $(MLX_PATH)
+	$(CC) $(CFLAGS) $(OBJ_B) $(LIBFT) $(MLXLIB) $(LDFLAGS) -o $(BONUS_NAME)
+
+# Bonus compile
+$(OBJS_B_PATH)/%.o: $(SRCS_BONUS_PATH)/%.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -MF $(@:.o=.d) -MT $@ -c $< -o $@
+
+# Clone and build MLX42
 $(MLX_PATH):
 	git clone $(MLX_REPO) $(MLX_PATH)
 	cmake -B $(MLX_PATH)/build -S $(MLX_PATH) -DGLFW_BUILD_DOCS=OFF -DGLFW_BUILD_TESTS=OFF -DGLFW_BUILD_EXAMPLES=OFF
@@ -77,7 +115,7 @@ $(MLX_PATH):
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
 
-# Clean rule to remove object files
+# Clean
 clean:
 	@rm -rf $(OBJS_PATH)
 	@$(MAKE) -C $(LIBFT_PATH) clean
@@ -85,12 +123,13 @@ clean:
 	@rm -f sources_dump.txt
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	/bin/rm -f $(NAME) $(BONUS_NAME)
 	@$(MAKE) -C $(LIBFT_PATH) fclean
 	@rm -rf $(MLX_PATH)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
 
--include $(DEPS)
+# Include deps for both variants
+-include $(DEPS_M) $(DEPS_B)
