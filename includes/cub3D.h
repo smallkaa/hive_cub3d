@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:14:10 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 12:45:52 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 12:49:07 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WINDOW_HEIGHT 1000
 # define WAND_W 400
 # define WAND_H 400
-# define WAND "./assets/wandd.png"
+# define WAND "./assets/wand.png"
 # define MOVE_SPEED 5
 # define ROTATION_SPEED 3.0
 # define COLLISION_BUFFER 5
