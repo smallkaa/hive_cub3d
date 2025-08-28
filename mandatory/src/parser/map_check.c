@@ -6,11 +6,12 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:30:03 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 15:05:45 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 19:36:15 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <stdio.h>
 
 bool	is_map_line(const char *line)
 {
@@ -37,6 +38,7 @@ int	find_map_start(t_map *map)
 	i = 0;
 	while (map->area[i])
 	{
+		printf("!!!Parsing line %d: [%s]\n", i, map->area[i]);
 		if (is_map_line(map->area[i]))
 			return (i);
 		i++;
@@ -49,7 +51,7 @@ int	symbols_check(t_map *map, int map_start)
 	int	x;
 	int	y;
 
-	y = map_start;
+	y = map_start - 1;
 	while (map->area[y])
 	{
 		x = 0;

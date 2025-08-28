@@ -6,11 +6,12 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:28:34 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/28 13:14:03 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 20:19:34 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <stdio.h>
 
 /*
 ** @brief  Parse "R,G,B" string into a 32-bit ARGB color.
@@ -27,9 +28,11 @@ static uint32_t	parse_color(const char *str)
 
 	i = 0;
 	r = parse_number(str, &i);
+	i = skip_spaces(str, i);
 	if (r < 0 || r > 255 || str[i++] != ',')
 		return (0xFFFFFFFF);
 	g = parse_number(str, &i);
+	i = skip_spaces(str, i);
 	if (g < 0 || g > 255 || str[i++] != ',')
 		return (0xFFFFFFFF);
 	b = parse_number(str, &i);
@@ -40,6 +43,16 @@ static uint32_t	parse_color(const char *str)
 		return (0xFFFFFFFF);
 	return ((r << 24) | (g << 16) | (b << 8) | 0xFF);
 }
+// static int assign_tex(char **tex_ptr, char *id, char *line, const char *msg)
+// {
+// 	if (!ft_strncmp(line, id, 2) && line[2] == ' ')
+// 	{
+// 		if (*tex_ptr)
+// 			return (err_msg(msg), -1);
+// 		return (set_path(tex_ptr, line + 2));
+// 	}
+// 	return (0);
+// }
 
 /*
 ** @brief      Parses a texture identifier line (NO, SO, WE, EA).
@@ -59,28 +72,35 @@ static uint32_t	parse_color(const char *str)
 */
 static int	parse_texture_line(t_map *map, const char *line)
 {
+	int len = 0;
+
+	while(line[len])
+		len++;
+	if (len < 4)
+		return (err_msg("weird symbol detected"), -1);
+	
 	if (!ft_strncmp(line, "NO", 2) && line[2] == ' ')
 	{
 		if (map->no)
-			return (err_msg("duplicate north texture"), 0);
+			return (err_msg("duplicate north texture"), -1);
 		return (set_path(&map->no, line + 2));
 	}
 	if (!ft_strncmp(line, "SO", 2) && line[2] == ' ')
 	{
 		if (map->so)
-			return (err_msg("duplicate south texture"), 0);
+			return (err_msg("duplicate south texture"), -1);
 		return (set_path(&map->so, line + 2));
 	}
 	if (!ft_strncmp(line, "WE", 2) && line[2] == ' ')
 	{
 		if (map->we)
-			return (err_msg("duplicate west texture"), 0);
+			return (err_msg("duplicate west texture"), -1);
 		return (set_path(&map->we, line + 2));
 	}
 	if (!ft_strncmp(line, "EA", 2) && line[2] == ' ')
 	{
 		if (map->ea)
-			return (err_msg("duplicate east texture"), 0);
+			return (err_msg("duplicate east texture"), -1);
 		return (set_path(&map->ea, line + 2));
 	}
 	return (0);
@@ -107,19 +127,19 @@ static int	parse_color_line(t_map *map, const char *line)
 	if (line[0] == 'F' && line[1] == ' ')
 	{
 		if (map->floor_c != 0xFFFFFFFF)
-			return (err_msg("duplicate floor color"), 0);
+			return (err_msg("duplicate floor color"), -1);
 		map->floor_c = parse_color(line + 1);
 		if (map->floor_c == 0xFFFFFFFF)
-			return (err_msg("invalid floor color"), 0);
+			return (err_msg("invalid floor color"), -1);
 		return (1);
 	}
 	if (line[0] == 'C' && line[1] == ' ')
 	{
 		if (map->ceil_c != 0xFFFFFFFF)
-			return (err_msg("duplicate ceiling color"), 0);
+			return (err_msg("duplicate ceiling color"), -1);
 		map->ceil_c = parse_color(line + 1);
 		if (map->ceil_c == 0xFFFFFFFF)
-			return (err_msg("invalid ceiling color"), 0);
+			return (err_msg("invalid ceiling color"), -1);
 		return (1);
 	}
 	return (0);
@@ -128,12 +148,30 @@ static int	parse_color_line(t_map *map, const char *line)
 int	parse_identifier_line(t_map *map, const char *line)
 {
 	if (ft_strchr(line, '\t'))
-		return (err_msg("invalid character: tab not allowed"), 0);
+		return (err_msg("invalid character: tab not allowed"), -1); // also fix this!
+
 	while (*line == ' ')
 		line++;
-	if (parse_texture_line(map, line))
+
+	int ret;
+
+	ret = parse_texture_line(map, line);
+	if (ret == -1)
+		return (-1);
+	if (ret == 1)
 		return (1);
-	if (parse_color_line(map, line))
+
+	ret = parse_color_line(map, line);
+	if (ret == -1)
+		return (-1);
+	if (ret == 1)
 		return (1);
-	return (0);
+
+	// if (line[0] == '1' || line[0] == '0' ||
+	// 	line[0] == 'N' || line[0] == 'S' || line[0] == 'E' || line[0] == 'W')
+	// 	return (1); // map starts here ✅
+
+	// return (err_msg("invalid texture or color identifier"), -1); // ⛔ catch-all
+	return 0;
 }
+

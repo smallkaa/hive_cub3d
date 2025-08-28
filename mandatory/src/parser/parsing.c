@@ -6,11 +6,12 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:28:03 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 15:00:28 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 20:11:07 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <stdio.h>
 
 static int	name_validation(char *filename)
 {
@@ -64,18 +65,26 @@ static int	parse_config_section(t_map *map)
 	map->ceil_c = 0xFFFFFFFF;
 	while (map->area[i])
 	{
+		printf("Parsing line %d: [%s]\n", i, map->area[i]);
+
 		if (is_map_line(map->area[i]))
-			break ;
-		else if (map->area[i][0] != '\0' && map->area[i][0] != '\n')
+			break;
+
+		if (map->area[i][0] == '\0' || map->area[i][0] == '\n')
 		{
-			if (!parse_identifier_line(map, map->area[i]))
-				return (-1);
+			i++;
+			continue;
 		}
+
+		if (parse_identifier_line(map, map->area[i]) == -1)
+			return (-1);
+
 		i++;
 	}
 	if (!map->no || !map->so || !map->we || !map->ea
 		|| map->floor_c == 0xFFFFFFFF || map->ceil_c == 0xFFFFFFFF)
 		return (err_msg("missing texture or color"), -1);
+	
 	return (i);
 }
 
@@ -99,11 +108,13 @@ t_map	*parsing_args(char *filename)
 	map_start = parse_config_section(map);
 	if (map_start < 0)
 	{
+		err_msg("config parsing failed");
 		free_map(map);
 		return (NULL);
 	}
 	if (validate_map_section(map, map_start) < 0)
 	{
+		err_msg("map validation failed");
 		free_map(map);
 		return (NULL);
 	}

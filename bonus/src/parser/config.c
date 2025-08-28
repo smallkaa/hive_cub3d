@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:28:34 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/28 13:14:03 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/28 16:13:56 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ static uint32_t	parse_color(const char *str)
 
 	i = 0;
 	r = parse_number(str, &i);
+	i = skip_spaces(str, i);
 	if (r < 0 || r > 255 || str[i++] != ',')
 		return (0xFFFFFFFF);
 	g = parse_number(str, &i);
+	i = skip_spaces(str, i);
 	if (g < 0 || g > 255 || str[i++] != ',')
 		return (0xFFFFFFFF);
 	b = parse_number(str, &i);
