@@ -5,7 +5,6 @@ SO     ./assets/wall.png
 
 
 
-
 WE ./assets/library.png
 
 
@@ -19,7 +18,7 @@ EA ./assets/pictures.png
 
 
 
-C41      ,00000254 ,68
+C 41      ,00000254 ,68
 
 
 

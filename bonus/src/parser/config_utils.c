@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:00:46 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 13:03:47 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/29 00:06:14 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 **          then duplicates the trimmed path into a new string.
 ** @return  Pointer to new allocated string, or NULL on error.
 */
-
 char	*dup_trim_path(const char *line)
 {
 	size_t	n;
@@ -43,15 +42,16 @@ char	*dup_trim_path(const char *line)
 ** @brief  Assign a texture path if not already set.
 ** @details Checks for duplicates, trims the path string with dup_trim_path(),
 **          and stores it in *dst.
-** @return  1 on success, 0 on error or duplicate.
+** @return  0 on success, -1 on error or duplicate.
 */
 int	set_path(char **dst, const char *rhs)
 {
 	if (*dst)
-	{
-		err_msg("duplicate texture");
-		return (0);
-	}
+		return (err_msg("duplicate texture"), -1);
+
 	*dst = dup_trim_path(rhs);
-	return (*dst != NULL);
+	if (!*dst || **dst == '\0')
+		return (err_msg("invalid or empty texture path"), -1);
+
+	return (0); // 
 }
