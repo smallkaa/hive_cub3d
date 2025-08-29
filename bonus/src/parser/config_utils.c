@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   config_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:00:46 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/29 11:20:12 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/29 12:56:16 by pvershin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3D_bonus.h"
 
 /*
 ** @brief  Create a clean copy of a path string.

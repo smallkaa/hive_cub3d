@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+         #
+#    By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/10 14:19:08 by mzhivoto          #+#    #+#              #
-#    Updated: 2025/08/18 20:24:15 by mzhivoto         ###   ########.fr        #
+#    Updated: 2025/08/29 12:53:18 by pvershin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = libft.a
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I../includes/
+CFLAGS = -Wall -Wextra -Werror -I../includes/ -I./../mandatory/includes -I./../bonus/includes
 
 # Source files and object files
 SRC = ft_bzero.c\

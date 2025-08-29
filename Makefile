@@ -4,7 +4,7 @@ BONUS_NAME  := cub3D_bonus
 
 # Compiler and flags
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror -I./includes/ -I./MLX42/include -Wunreachable-code -O0
+CFLAGS = -g -Wall -Wextra -Werror -I./mandatory/includes -I./bonus/includes -I./MLX42/include -Wunreachable-code -O0
 DEPFLAGS = -MMD -MP
 CFLAGS  += $(DEPFLAGS)
 

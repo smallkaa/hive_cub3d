@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   config.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:28:34 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/29 11:18:37 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/29 12:56:24 by pvershin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3D_bonus.h"
 
 /*
 ** @brief  Parse "R,G,B" string into a 32-bit ARGB color.

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   drawback.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Pavel Vershinin <pvershin@student.hive.    +#+  +:+       +#+        */
+/*   By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:26:25 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/27 20:26:26 by Pavel Versh      ###   ########.fr       */
+/*   Updated: 2025/08/29 12:57:47 by pvershin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3D_bonus.h"
 
 /*
 ** @brief      Fills the screen with the ceiling and floor colors.

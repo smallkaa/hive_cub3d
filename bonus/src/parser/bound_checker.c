@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   bound_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Pavel Vershinin <pvershin@student.hive.    +#+  +:+       +#+        */
+/*   By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:28:29 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/27 20:28:30 by Pavel Versh      ###   ########.fr       */
+/*   Updated: 2025/08/29 12:56:10 by pvershin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3D_bonus.h"
 
 static char	getmapitem(t_map *map, int x, int y)
 {

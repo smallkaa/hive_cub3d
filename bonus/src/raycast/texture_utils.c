@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Pavel Vershinin <pvershin@student.hive.    +#+  +:+       +#+        */
+/*   By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:26:56 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/27 20:26:57 by Pavel Versh      ###   ########.fr       */
+/*   Updated: 2025/08/29 12:58:18 by pvershin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3D_bonus.h"
 
 /**
  * @brief Determines which texture to use based on the wall side hit by a ray.
