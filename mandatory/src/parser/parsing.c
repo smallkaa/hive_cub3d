@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:28:03 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 23:32:20 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/29 11:18:52 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ static int	parse_config_section(t_map *map)
 	while (map->area[i])
 	{
 		if (is_map_line(map->area[i]))
-			break;
+			break ;
 		if (map->area[i][0] == '\0' || map->area[i][0] == '\n')
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		if (parse_identifier_line(map, map->area[i]) == -1)
 			return (-1);

@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:28:34 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/29 00:08:32 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/29 11:18:37 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 ** @brief  Parse "R,G,B" string into a 32-bit ARGB color.
-** @details Validates that each component is 0–255, enforces commas as 
+** @details Validates that each component is 0–255, enforces commas as
 **          separators, and packs values into uint32_t (R|G|B|Alpha).
 ** @return  Packed color (e.g. 0xRRGGBBFF) or 0xFFFFFFFF on error.
 */
@@ -56,7 +56,7 @@ static int	set_texture(char **dst, const char *path, char *msg)
 ** @details    This function checks whether the given line starts with one of
 **             valid texture identifiers ("NO", "SO", "WE", "EA") followed by a
 **             space. If so, it ensures that the corresponding texture has not
-**             already been assigned (duplicate check). On success, it calls 
+**             already been assigned (duplicate check). On success, it calls
 **             set_texture() to validate and store the path to the texture file
 **
 **             Behavior:
@@ -128,12 +128,12 @@ static int	parse_color_line(t_map *map, const char *line)
 
 int	parse_identifier_line(t_map *map, const char *line)
 {
+	int	ret;
+
 	if (ft_strchr(line, '\t'))
 		return (err_msg("invalid character: tab not allowed"), -1);
-
 	while (*line == ' ')
 		line++;
-	int ret;
 	ret = parse_texture_line(map, line);
 	if (ret == -1)
 		return (-1);
@@ -144,5 +144,5 @@ int	parse_identifier_line(t_map *map, const char *line)
 		return (-1);
 	if (ret == 1)
 		return (1);
-	return 0;
+	return (0);
 }

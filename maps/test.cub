@@ -1,4 +1,6 @@
-F  41,44,54
+
+F 41,44,54
+
 
 SO     ./assets/wall.png
 
@@ -14,11 +16,13 @@ EA ./assets/pictures.png
 
 
 
+C 41      ,0000048,68
 
 
 
 
-C 41      ,00000254 ,68
+
+
 
 
 

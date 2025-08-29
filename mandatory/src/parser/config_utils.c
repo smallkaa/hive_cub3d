@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:00:46 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/29 00:10:04 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/29 11:20:16 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ int	set_path(char **dst, const char *rhs)
 {
 	if (*dst)
 		return (err_msg("duplicate texture"), -1);
-
 	*dst = dup_trim_path(rhs);
 	if (!*dst || **dst == '\0')
 		return (err_msg("invalid or empty texture path"), -1);
-
-	return (0); // 
+	return (0);
 }

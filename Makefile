@@ -115,6 +115,9 @@ $(MLX_PATH):
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
 
+# Include deps for both variants
+-include $(DEPS_M) $(DEPS_B)
+
 # Clean
 clean:
 	@rm -rf $(OBJS_PATH)
@@ -130,6 +133,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all bonus clean fclean re
-
-# Include deps for both variants
--include $(DEPS_M) $(DEPS_B)
