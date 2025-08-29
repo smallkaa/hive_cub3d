@@ -2,10 +2,12 @@ NO ./assets/lanterns.png
 SO ./assets/wall.png
 WE ./assets/library.png
 EA ./assets/pictures.png
-E ./assets/pictures.png
+E  
+
 
 C      41     ,48,68
 F 41,44,54
+
 
 
 11111111111111111111111111111111111111111111111111111111
