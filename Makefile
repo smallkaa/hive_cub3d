@@ -58,22 +58,22 @@ SRC = $(SRCS_PATH)/main.c \
 		$(SRCS_PATH)/game/movement.c \
 		$(SRCS_PATH)/game/game_utils.c
 
-SRC_BONUS = $(SRCS_BONUS_PATH)/main.c \
-		$(SRCS_BONUS_PATH)/raycast/raycast.c \
-		$(SRCS_BONUS_PATH)/raycast/drawback.c \
-		$(SRCS_BONUS_PATH)/raycast/drawtexture.c \
-		$(SRCS_BONUS_PATH)/raycast/texture_utils.c \
-		$(SRCS_BONUS_PATH)/init/textures.c \
-		$(SRCS_BONUS_PATH)/parser/utils.c \
-		$(SRCS_BONUS_PATH)/parser/parsing.c \
-		$(SRCS_BONUS_PATH)/parser/map_check.c \
-		$(SRCS_BONUS_PATH)/parser/bound_checker.c \
-		$(SRCS_BONUS_PATH)/parser/config.c \
-		$(SRCS_BONUS_PATH)/parser/config_utils.c \
-		$(SRCS_BONUS_PATH)/parser/read.c \
-		$(SRCS_BONUS_PATH)/game/loop.c \
-		$(SRCS_BONUS_PATH)/game/movement.c \
-		$(SRCS_BONUS_PATH)/game/game_utils.c
+SRC_BONUS = $(SRCS_BONUS_PATH)/main_bonus.c \
+		$(SRCS_BONUS_PATH)/raycast/raycast_bonus.c \
+		$(SRCS_BONUS_PATH)/raycast/drawback_bonus.c \
+		$(SRCS_BONUS_PATH)/raycast/drawtexture_bonus.c \
+		$(SRCS_BONUS_PATH)/raycast/texture_utils_bonus.c \
+		$(SRCS_BONUS_PATH)/init/textures_bonus.c \
+		$(SRCS_BONUS_PATH)/parser/utils_bonus.c \
+		$(SRCS_BONUS_PATH)/parser/parsing_bonus.c \
+		$(SRCS_BONUS_PATH)/parser/map_check_bonus.c \
+		$(SRCS_BONUS_PATH)/parser/bound_checker_bonus.c \
+		$(SRCS_BONUS_PATH)/parser/config_bonus.c \
+		$(SRCS_BONUS_PATH)/parser/config_utils_bonus.c \
+		$(SRCS_BONUS_PATH)/parser/read_bonus.c \
+		$(SRCS_BONUS_PATH)/game/loop_bonus.c \
+		$(SRCS_BONUS_PATH)/game/movement_bonus.c \
+		$(SRCS_BONUS_PATH)/game/game_utils_bonus.c
 
 # Objects & deps split per variant
 OBJ_M := $(patsubst $(SRCS_PATH)/%.c, $(OBJS_M_PATH)/%.o, $(SRC))
