@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:14:10 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/28 19:29:45 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/29 12:30:46 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include <stdlib.h>
-# include <stdio.h>
 
 # define TILE_SIZE 64
 # define WINDOW_WIDTH 1200

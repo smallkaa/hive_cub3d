@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:27:54 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/28 13:15:11 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/29 12:24:17 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,28 +73,34 @@ void	free_resources(t_game *game)
 {
 	int	i;
 
-	i = 0;
 	if (game->img)
+	{
 		mlx_delete_image(game->mlx, game->img);
+		game->img = NULL;
+	}
 	if (game->wand)
+	{
 		mlx_delete_image(game->mlx, game->wand);
+		game->wand = NULL;
+	}
+	i = 0;
 	while (i < 4)
 	{
 		if (game->tx.tex[i])
+		{
 			mlx_delete_texture(game->tx.tex[i]);
+			game->tx.tex[i] = NULL;
+		}
 		i++;
 	}
 }
 
 void	close_game(t_game *game)
 {
-	int	i;
-
-	i = 0;
-	while (i < 4)
+	free_resources(game);
+	if (game->mlx)
 	{
-		if (game->tx.tex[i])
-			mlx_delete_texture(game->tx.tex[i]);
-		i++;
+		mlx_terminate(game->mlx);
+		game->mlx = NULL;
 	}
 }
