@@ -6,7 +6,7 @@
 /*   By: mzhivoto <mzhivoto@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:28:34 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/29 11:19:13 by mzhivoto         ###   ########.fr       */
+/*   Updated: 2025/08/29 17:48:05 by mzhivoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,22 @@ static int	parse_texture_line(t_map *m, const char *line)
 {
 	if (!line || ft_strlen(line) < 4)
 		return (err_msg("weird symbol detected"), -1);
-	if (!ft_strncmp(line, "NO", 2) && line[2] == ' ')
+	if (line[0] == '.' && line[1] == '/')
+		return (err_msg("missing identifier before texture path"), -1);
+	if ((ft_strncmp(line, "NO", 2) == 0) && line[2] == ' ')
 		return (set_texture(&m->no, line + 2, "duplicate north texture"));
-	if (!ft_strncmp(line, "SO", 2) && line[2] == ' ')
+	if ((ft_strncmp(line, "SO", 2) == 0) && line[2] == ' ')
 		return (set_texture(&m->so, line + 2, "duplicate south texture"));
-	if (!ft_strncmp(line, "WE", 2) && line[2] == ' ')
+	if ((ft_strncmp(line, "WE", 2) == 0) && line[2] == ' ')
 		return (set_texture(&m->we, line + 2, "duplicate west texture"));
-	if (!ft_strncmp(line, "EA", 2) && line[2] == ' ')
+	if ((ft_strncmp(line, "EA", 2) == 0) && line[2] == ' ')
 		return (set_texture(&m->ea, line + 2, "duplicate east texture"));
+	if (ft_isalpha(line[0]))
+	{
+		if (!(line[0] == 'F' && line[1] == ' ')
+			&& !(line[0] == 'C' && line[1] == ' '))
+			return (err_msg("unknown identifier"), -1);
+	}
 	return (0);
 }
 
