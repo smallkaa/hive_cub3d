@@ -6,7 +6,7 @@
 /*   By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:26:56 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/09/02 11:25:43 by pvershin         ###   ########.fr       */
+/*   Updated: 2025/09/02 12:33:58 by pvershin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ t_face	determine_wall_face(t_ray *r)
 	if (r->side == 0)
 	{
 		if (r->stepx > 0)
-			return (TEX_EA);
-		else
 			return (TEX_WE);
+		else
+			return (TEX_EA);
 	}
 	else
 	{

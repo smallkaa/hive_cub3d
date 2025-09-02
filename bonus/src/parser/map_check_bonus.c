@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_check.c                                        :+:      :+:    :+:   */
+/*   map_check_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 00:30:03 by mzhivoto          #+#    #+#             */
-/*   Updated: 2025/08/29 12:56:30 by pvershin         ###   ########.fr       */
+/*   Updated: 2025/09/02 12:39:46 by pvershin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ static int	process_hero_coordinates(t_map *map, int x, int y)
 		else if (map->area[y][x] == 'S')
 			map->hero.angle = 180;
 		else if (map->area[y][x] == 'E')
-			map->hero.angle = 90;
-		else if (map->area[y][x] == 'W')
 			map->hero.angle = 270;
+		else if (map->area[y][x] == 'W')
+			map->hero.angle = 90;
 		return (1);
 	}
 	return (0);
