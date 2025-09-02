@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_utils.c                                    :+:      :+:    :+:   */
+/*   texture_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvershin <pvershin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:26:56 by Pavel Versh       #+#    #+#             */
-/*   Updated: 2025/08/29 12:58:18 by pvershin         ###   ########.fr       */
+/*   Updated: 2025/09/02 10:10:14 by pvershin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ t_face	determine_wall_face(t_ray *r)
 	if (r->side == 0)
 	{
 		if (r->stepx > 0)
-			return (TEX_EA);
-		else
 			return (TEX_WE);
+		else
+			return (TEX_EA);
 	}
 	else
 	{
